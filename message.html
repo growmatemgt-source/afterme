@@ -1,866 +1,956 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AFTERME — Your Message</title>
+<title>AFTERME — Your Message</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
-        rel="stylesheet"
-    >
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
 
-    <style>
+<style>
 
-        :root {
-            --bg: #0b0908;
-            --surface: #11100f;
-            --surface-soft: #151311;
+:root{
+    --bg:#151210;
+    --bg-soft:#1b1714;
 
-            --ivory: #eee8df;
-            --text: #c7c0b8;
-            --muted: #918982;
-            --dim: #625b56;
+    --paper:#e8ddd0;
+    --paper-dark:#d8c8b8;
 
-            --rose: #c98282;
-            --rose-soft: rgba(201,130,130,.10);
+    --ink:#302823;
+    --ink-soft:#62564d;
 
-            --warm: #b9a99a;
+    --cream:#eee5db;
+    --muted:#aaa097;
 
-            --border: rgba(238,232,223,.10);
-            --border-soft: rgba(238,232,223,.065);
+    --rose:#ad7779;
+    --rose-soft:#c59694;
 
-            --sans: "Inter", sans-serif;
-            --serif: "Playfair Display", serif;
-            --mono: "DM Mono", monospace;
-        }
+    --brown:#9b806d;
 
+    --line:rgba(48,40,35,.15);
+    --white-line:rgba(238,229,219,.10);
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    --sans:"Inter",sans-serif;
+    --serif:"Playfair Display",serif;
+    --mono:"DM Mono",monospace;
+}
 
 
-        body {
-            min-height: 100vh;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-            background:
-                radial-gradient(
-                    circle at 50% -10%,
-                    rgba(201,130,130,.055),
-                    transparent 34%
-                ),
-                var(--bg);
 
-            color: var(--ivory);
+body{
+    min-height:100vh;
 
-            font-family: var(--sans);
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(173,119,121,.12),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(155,128,109,.07),
+            transparent 30%
+        ),
+        var(--bg);
 
-            overflow-x: hidden;
-        }
+    color:var(--cream);
 
+    font-family:var(--sans);
 
-        body::before {
-            content: "";
+    overflow-x:hidden;
+}
 
-            position: fixed;
 
-            inset: 0;
+/* subtle paper/noise feeling */
 
-            pointer-events: none;
+body::before{
+    content:"";
 
-            background:
-                radial-gradient(
-                    circle at 85% 20%,
-                    rgba(185,169,154,.025),
-                    transparent 25%
-                );
+    position:fixed;
+    inset:0;
 
-            z-index: 0;
-        }
+    pointer-events:none;
 
+    opacity:.035;
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 
+    z-index:0;
+}
 
-        /* =========================
-           TOP BAR
-        ========================= */
 
-        .topbar {
-            height: 76px;
+a{
+    color:inherit;
+    text-decoration:none;
+}
 
-            padding: 0 5vw;
 
-            display: flex;
+/* =========================
+   TOP BAR
+========================= */
 
-            align-items: center;
+.topbar{
+    height:74px;
 
-            justify-content: space-between;
+    padding:0 5vw;
 
-            border-bottom:
-                1px solid var(--border-soft);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-            position: relative;
+    border-bottom:
+        1px solid var(--white-line);
 
-            z-index: 10;
-        }
+    position:relative;
+    z-index:5;
+}
 
 
-        .brand {
-            display: flex;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
 
-            align-items: center;
 
-            gap: 11px;
-        }
+.brand-mark{
+    width:29px;
+    height:29px;
 
+    border:1px solid
+        rgba(197,150,148,.65);
 
-        .brand-mark {
-            width: 28px;
-            height: 28px;
+    border-radius:50%;
 
-            border: 1px solid
-                rgba(201,130,130,.65);
+    display:grid;
+    place-items:center;
 
-            border-radius: 50%;
+    color:var(--rose-soft);
 
-            display: grid;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:13px;
+}
 
-            place-items: center;
 
-            color: var(--rose);
+.brand-name{
+    color:var(--cream);
 
-            font-family: var(--serif);
+    font-family:var(--mono);
+    font-size:10px;
 
-            font-size: 12px;
+    letter-spacing:.19em;
+}
 
-            font-style: italic;
-        }
 
+.back-link{
+    color:var(--muted);
 
-        .brand-name {
-            color: var(--ivory);
+    font-family:var(--mono);
+    font-size:8px;
 
-            font-family: var(--mono);
+    letter-spacing:.08em;
 
-            font-size: 10px;
+    transition:.3s ease;
+}
 
-            letter-spacing: .20em;
-        }
 
+.back-link:hover{
+    color:var(--cream);
+}
 
-        .back-link {
-            color: var(--muted);
 
-            font-family: var(--mono);
+/* =========================
+   MAIN
+========================= */
 
-            font-size: 8px;
+main{
+    width:min(1080px,calc(100% - 30px));
 
-            letter-spacing: .09em;
+    margin:auto;
 
-            transition: .25s ease;
-        }
+    padding:
+        82px 0
+        100px;
 
+    position:relative;
+    z-index:1;
+}
 
-        .back-link:hover {
-            color: var(--ivory);
-        }
 
+/* =========================
+   HERO
+========================= */
 
-        /* =========================
-           MAIN
-        ========================= */
+.reveal-header{
+    text-align:center;
+}
 
-        main {
-            width: min(1080px, calc(100% - 32px));
 
-            margin: auto;
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
 
-            padding:
-                82px 0
-                100px;
+    color:var(--rose-soft);
 
-            position: relative;
+    font-family:var(--mono);
+    font-size:8px;
 
-            z-index: 2;
-        }
+    letter-spacing:.16em;
 
+    text-transform:uppercase;
+}
 
-        /* =========================
-           HERO
-        ========================= */
 
-        .reveal-header {
-            text-align: center;
-        }
+.eyebrow::before,
+.eyebrow::after{
+    content:"";
 
+    width:28px;
+    height:1px;
 
-        .eyebrow {
-            display: inline-flex;
+    background:
+        rgba(197,150,148,.45);
+}
 
-            align-items: center;
 
-            gap: 11px;
+.reveal-header h1{
+    max-width:1000px;
 
-            color: var(--rose);
+    margin:24px auto 0;
 
-            font-family: var(--mono);
+    color:var(--cream);
 
-            font-size: 8px;
+    font-size:
+        clamp(48px,7vw,82px);
 
-            letter-spacing: .16em;
+    line-height:1;
 
-            text-transform: uppercase;
-        }
+    letter-spacing:-.065em;
 
+    font-weight:500;
+}
 
-        .eyebrow::before,
-        .eyebrow::after {
-            content: "";
 
-            width: 25px;
+.reveal-header h1 em{
+    color:var(--rose-soft);
 
-            height: 1px;
+    font-family:var(--serif);
 
-            background:
-                rgba(201,130,130,.38);
-        }
+    font-weight:500;
+}
 
 
-        .reveal-header h1 {
-            max-width: 1050px;
+.subline{
+    max-width:560px;
 
-            margin: 22px auto 0;
+    margin:25px auto 0;
 
-            color: var(--ivory);
+    color:#9e958e;
 
-            font-size:
-                clamp(48px, 7vw, 86px);
+    font-size:13px;
 
-            line-height: .98;
+    line-height:1.8;
+}
 
-            letter-spacing: -.065em;
 
-            font-weight: 500;
-        }
+/* =========================
+   LETTER AREA
+========================= */
 
+.message-wrapper{
+    margin-top:66px;
+}
 
-        .reveal-header h1 em {
-            color: var(--rose);
 
-            font-family: var(--serif);
+/*
+   THE LETTER
+*/
 
-            font-weight: 500;
+.message-card{
+    position:relative;
 
-            letter-spacing: -.045em;
-        }
+    max-width:980px;
 
+    margin:auto;
 
-        .subline {
-            max-width: 540px;
+    padding:
+        70px
+        75px
+        48px;
 
-            margin: 25px auto 0;
+    background:
+        linear-gradient(
+            145deg,
+            #eee4d8 0%,
+            #e6d9cc 55%,
+            #ddcdbd 100%
+        );
 
-            color: var(--muted);
+    color:var(--ink);
 
-            font-size: 13px;
+    border-radius:3px;
 
-            line-height: 1.8;
-        }
+    box-shadow:
+        0 28px 80px
+        rgba(0,0,0,.28),
 
+        0 5px 20px
+        rgba(0,0,0,.15);
 
-        /* =========================
-           MESSAGE
-        ========================= */
+    overflow:hidden;
+}
 
-        .message-wrapper {
-            margin-top: 60px;
-        }
 
+/* paper edge */
 
-        .message-card {
-            position: relative;
+.message-card::before{
+    content:"";
 
-            padding:
-                58px
-                64px
-                38px;
+    position:absolute;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(255,255,255,.025),
-                    rgba(255,255,255,.006)
-                );
+    inset:10px;
 
-            border:
-                1px solid var(--border);
+    border:
+        1px solid
+        rgba(48,40,35,.09);
 
-            overflow: hidden;
-        }
+    pointer-events:none;
+}
 
 
-        .message-card::before {
-            content: "";
+/* warm paper glow */
 
-            position: absolute;
+.message-card::after{
+    content:"";
 
-            width: 360px;
-            height: 360px;
+    position:absolute;
 
-            top: -240px;
-            right: -130px;
+    width:420px;
+    height:420px;
 
-            background:
-                rgba(201,130,130,.045);
+    right:-180px;
+    top:-190px;
 
-            border-radius: 50%;
+    background:
+        rgba(173,119,121,.10);
 
-            filter: blur(45px);
+    border-radius:50%;
 
-            pointer-events: none;
-        }
+    filter:blur(45px);
 
+    pointer-events:none;
+}
 
-        .message-card::after {
-            content: "";
 
-            position: absolute;
+/* =========================
+   LETTER TOP
+========================= */
 
-            left: 0;
-            top: 12%;
+.letter-top{
+    position:relative;
+    z-index:2;
 
-            width: 2px;
-            height: 76%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-            background:
-                linear-gradient(
-                    to bottom,
-                    transparent,
-                    rgba(201,130,130,.65),
-                    transparent
-                );
-        }
+    margin-bottom:42px;
+}
 
 
-        /* =========================
-           LABEL
-        ========================= */
+.message-label{
+    color:#9b6668;
 
-        .message-label {
-            color: var(--rose);
+    font-family:var(--mono);
 
-            font-family: var(--mono);
+    font-size:8px;
 
-            font-size: 9px;
+    letter-spacing:.16em;
 
-            font-weight: 500;
+    text-transform:uppercase;
 
-            letter-spacing: .13em;
+    font-weight:500;
+}
 
-            text-transform: uppercase;
 
-            line-height: 1.5;
-        }
+.letter-symbol{
+    width:34px;
+    height:34px;
 
+    border:
+        1px solid
+        rgba(48,40,35,.13);
 
-        /* =========================
-           MESSAGE TITLE
-        ========================= */
+    border-radius:50%;
 
-        .message-title {
-            margin-top: 16px;
+    display:grid;
+    place-items:center;
 
-            color: var(--ivory);
+    color:#9b6668;
 
-            font-family: var(--serif);
+    font-family:var(--serif);
 
-            font-size:
-                clamp(34px, 4vw, 48px);
+    font-size:16px;
 
-            line-height: 1.15;
+    font-style:italic;
+}
 
-            font-weight: 500;
 
-            letter-spacing: -.025em;
-        }
+/* =========================
+   TITLE
+========================= */
 
+.message-title{
+    position:relative;
+    z-index:2;
 
-        /* =========================
-           MESSAGE TEXT
-        ========================= */
+    max-width:760px;
 
-        .message-content {
-            max-width: 760px;
+    color:var(--ink);
 
-            margin-top: 30px;
+    font-family:var(--serif);
 
-            color: var(--text);
+    font-size:
+        clamp(38px,5vw,58px);
 
-            font-size: 16px;
+    line-height:1.12;
 
-            line-height: 2;
+    font-weight:500;
 
-            white-space: pre-wrap;
-        }
+    letter-spacing:-.035em;
+}
 
 
-        /* =========================
-           FOOTER
-        ========================= */
+/* =========================
+   LITTLE INTRO
+========================= */
 
-        .message-footer {
-            margin-top: 46px;
+.letter-intro{
+    position:relative;
+    z-index:2;
 
-            padding-top: 20px;
+    margin-top:24px;
 
-            border-top:
-                1px solid var(--border-soft);
+    color:#71655c;
 
-            display: flex;
+    font-family:var(--serif);
 
-            align-items: center;
+    font-size:16px;
 
-            justify-content: space-between;
-        }
+    font-style:italic;
 
+    line-height:1.8;
+}
 
-        .written {
-            color: var(--dim);
 
-            font-family: var(--mono);
+/* =========================
+   MESSAGE
+========================= */
 
-            font-size: 8px;
+.message-content{
+    position:relative;
+    z-index:2;
 
-            letter-spacing: .08em;
-        }
+    max-width:720px;
 
+    margin-top:38px;
 
-        .opened-mark {
-            display: flex;
+    color:#413832;
 
-            align-items: center;
+    font-size:16px;
 
-            gap: 8px;
+    line-height:2;
 
-            color: var(--warm);
+    white-space:pre-wrap;
+}
 
-            font-family: var(--mono);
 
-            font-size: 8px;
+/* =========================
+   SIGNATURE
+========================= */
 
-            letter-spacing: .08em;
-        }
+.signature{
+    position:relative;
+    z-index:2;
 
+    margin-top:45px;
 
-        .opened-dot {
-            width: 5px;
-            height: 5px;
+    color:#7b6a5d;
 
-            border-radius: 50%;
+    font-family:var(--serif);
 
-            background: var(--rose);
+    font-size:22px;
 
-            box-shadow:
-                0 0 12px
-                rgba(201,130,130,.55);
-        }
+    font-style:italic;
+}
 
 
-        /* =========================
-           BOTTOM
-        ========================= */
+/* =========================
+   LETTER FOOTER
+========================= */
 
-        .bottom-area {
-            margin-top: 24px;
+.message-footer{
+    position:relative;
+    z-index:2;
 
-            display: flex;
+    margin-top:42px;
 
-            align-items: center;
+    padding-top:20px;
 
-            justify-content: space-between;
-        }
+    border-top:
+        1px solid var(--line);
 
+    display:flex;
 
-        .memory-note {
-            color: var(--dim);
+    align-items:center;
 
-            font-family: var(--mono);
+    justify-content:space-between;
+}
 
-            font-size: 8px;
 
-            letter-spacing: .07em;
-        }
+.written{
+    color:#8d8075;
 
+    font-family:var(--mono);
 
-        .dashboard-button {
-            min-height: 42px;
+    font-size:7px;
 
-            padding: 0 17px;
+    letter-spacing:.09em;
+}
 
-            display: inline-flex;
 
-            align-items: center;
+.opened-mark{
+    display:flex;
+    align-items:center;
+    gap:8px;
 
-            justify-content: center;
+    color:#8d716f;
 
-            border:
-                1px solid var(--border);
+    font-family:var(--mono);
 
-            color: var(--muted);
+    font-size:7px;
 
-            font-family: var(--mono);
+    letter-spacing:.09em;
+}
 
-            font-size: 8px;
 
-            letter-spacing: .07em;
+.opened-dot{
+    width:6px;
+    height:6px;
 
-            transition: .25s ease;
-        }
+    border-radius:50%;
 
+    background:var(--rose);
 
-        .dashboard-button:hover {
-            color: var(--ivory);
+    box-shadow:
+        0 0 10px
+        rgba(173,119,121,.45);
+}
 
-            border-color:
-                rgba(201,130,130,.35);
 
-            background:
-                var(--rose-soft);
-        }
+/* =========================
+   BOTTOM
+========================= */
 
+.bottom-area{
+    max-width:980px;
 
-        /* =========================
-           LOCKED
-        ========================= */
+    margin:22px auto 0;
 
-        .locked {
-            text-align: center;
+    display:flex;
 
-            padding-top: 10px;
-        }
+    align-items:center;
 
+    justify-content:space-between;
+}
 
-        .lock-icon {
-            width: 72px;
-            height: 72px;
 
-            margin: auto;
+.memory-note{
+    color:#756c66;
 
-            display: grid;
+    font-family:var(--mono);
 
-            place-items: center;
+    font-size:7px;
 
-            border:
-                1px solid
-                rgba(201,130,130,.28);
+    letter-spacing:.09em;
+}
 
-            border-radius: 50%;
 
-            color: var(--rose);
+.dashboard-button{
+    min-height:42px;
 
-            font-family: var(--serif);
+    padding:0 18px;
 
-            font-size: 22px;
+    display:inline-flex;
 
-            font-style: italic;
-        }
+    align-items:center;
+    justify-content:center;
 
+    border:
+        1px solid
+        rgba(238,229,219,.12);
 
-        .locked h1 {
-            margin-top: 28px;
+    color:#9e958e;
 
-            color: var(--ivory);
+    font-family:var(--mono);
 
-            font-size:
-                clamp(48px, 7vw, 80px);
+    font-size:8px;
 
-            line-height: .98;
+    letter-spacing:.07em;
 
-            letter-spacing: -.06em;
+    transition:.3s ease;
+}
 
-            font-weight: 500;
-        }
 
+.dashboard-button:hover{
+    color:var(--cream);
 
-        .locked h1 em {
-            color: var(--rose);
+    border-color:
+        rgba(197,150,148,.35);
 
-            font-family: var(--serif);
+    background:
+        rgba(173,119,121,.08);
+}
 
-            font-weight: 500;
-        }
 
+/* =========================
+   LOCKED
+========================= */
 
-        .locked-copy {
-            max-width: 470px;
+.locked{
+    text-align:center;
 
-            margin: 23px auto 0;
+    padding-top:20px;
+}
 
-            color: var(--muted);
 
-            font-size: 13px;
+.lock-icon{
+    width:76px;
+    height:76px;
 
-            line-height: 1.8;
-        }
+    margin:auto;
 
+    display:grid;
+    place-items:center;
 
-        .countdown {
-            max-width: 650px;
+    border:
+        1px solid
+        rgba(197,150,148,.35);
 
-            margin: 48px auto 0;
+    border-radius:50%;
 
-            display: grid;
+    color:var(--rose-soft);
 
-            grid-template-columns:
-                repeat(4, 1fr);
+    font-family:var(--serif);
 
-            border:
-                1px solid var(--border);
-        }
+    font-size:25px;
 
+    font-style:italic;
+}
 
-        .time-box {
-            padding: 26px 10px;
 
-            border-right:
-                1px solid var(--border);
-        }
+.locked h1{
+    margin-top:30px;
 
+    color:var(--cream);
 
-        .time-box:last-child {
-            border-right: none;
-        }
+    font-size:
+        clamp(48px,7vw,78px);
 
+    line-height:1;
 
-        .number {
-            color: var(--ivory);
+    letter-spacing:-.06em;
 
-            font-family: var(--mono);
+    font-weight:500;
+}
 
-            font-size: 30px;
-        }
 
+.locked h1 em{
+    color:var(--rose-soft);
 
-        .unit {
-            display: block;
+    font-family:var(--serif);
 
-            margin-top: 8px;
+    font-weight:500;
+}
 
-            color: var(--dim);
 
-            font-family: var(--mono);
+.locked-copy{
+    max-width:470px;
 
-            font-size: 7px;
+    margin:24px auto 0;
 
-            letter-spacing: .12em;
-        }
+    color:var(--muted);
 
+    font-size:13px;
 
-        .reveal-date {
-            margin-top: 20px;
+    line-height:1.8;
+}
 
-            color: var(--dim);
 
-            font-family: var(--mono);
+.countdown{
+    max-width:650px;
 
-            font-size: 8px;
+    margin:48px auto 0;
 
-            letter-spacing: .07em;
-        }
+    display:grid;
 
+    grid-template-columns:
+        repeat(4,1fr);
 
-        /* =========================
-           ERROR
-        ========================= */
+    border:
+        1px solid var(--white-line);
+}
 
-        .error-state {
-            display: none;
 
-            text-align: center;
+.time-box{
+    padding:27px 10px;
 
-            padding: 90px 0;
-        }
+    border-right:
+        1px solid var(--white-line);
+}
 
 
-        .error-state h1 {
-            color: var(--ivory);
+.time-box:last-child{
+    border-right:none;
+}
 
-            font-family: var(--serif);
 
-            font-size: 48px;
+.number{
+    color:var(--cream);
 
-            font-weight: 500;
-        }
+    font-family:var(--mono);
 
+    font-size:30px;
+}
 
-        .error-state p {
-            margin-top: 15px;
 
-            color: var(--muted);
+.unit{
+    display:block;
 
-            font-size: 13px;
-        }
+    margin-top:8px;
 
+    color:#746c66;
 
-        /* =========================
-           MOBILE
-        ========================= */
+    font-family:var(--mono);
 
-        @media (max-width: 700px) {
+    font-size:7px;
 
-            .topbar {
-                height: 70px;
+    letter-spacing:.12em;
+}
 
-                padding: 0 18px;
-            }
 
+.reveal-date{
+    margin-top:20px;
 
-            main {
-                width:
-                    calc(100% - 26px);
+    color:#746c66;
 
-                padding:
-                    60px 0
-                    75px;
-            }
+    font-family:var(--mono);
 
+    font-size:8px;
 
-            .reveal-header h1 {
-                font-size: 48px;
-            }
+    letter-spacing:.07em;
+}
 
 
-            .subline {
-                font-size: 12px;
+/* =========================
+   ERROR
+========================= */
 
-                padding: 0 8px;
-            }
+.error-state{
+    display:none;
 
+    text-align:center;
 
-            .message-wrapper {
-                margin-top: 45px;
-            }
+    padding:90px 0;
+}
 
 
-            .message-card {
-                padding:
-                    38px
-                    24px
-                    28px;
-            }
+.error-state h1{
+    color:var(--cream);
 
+    font-family:var(--serif);
 
-            .message-label {
-                font-size: 8px;
-            }
+    font-size:48px;
 
+    font-weight:500;
+}
 
-            .message-title {
-                font-size: 32px;
-            }
 
+.error-state p{
+    margin-top:15px;
 
-            .message-content {
-                margin-top: 25px;
+    color:var(--muted);
 
-                font-size: 14px;
+    font-size:13px;
+}
 
-                line-height: 1.9;
-            }
 
+/* =========================
+   MOBILE
+========================= */
 
-            .message-footer {
-                align-items: flex-start;
+@media(max-width:700px){
 
-                flex-direction: column;
+    .topbar{
+        height:68px;
+        padding:0 18px;
+    }
 
-                gap: 15px;
-            }
 
+    main{
+        width:calc(100% - 24px);
 
-            .bottom-area {
-                align-items: stretch;
+        padding:
+            58px 0
+            70px;
+    }
 
-                flex-direction: column;
 
-                gap: 14px;
-            }
+    .reveal-header h1{
+        font-size:46px;
+    }
 
 
-            .memory-note {
-                text-align: center;
-            }
+    .subline{
+        font-size:12px;
+        padding:0 10px;
+    }
 
 
-            .dashboard-button {
-                width: 100%;
-            }
+    .message-wrapper{
+        margin-top:45px;
+    }
 
 
-            .countdown {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
+    .message-card{
+        padding:
+            45px
+            28px
+            30px;
+    }
 
 
-            .time-box:nth-child(2) {
-                border-right: none;
-            }
+    .letter-top{
+        margin-bottom:34px;
+    }
 
 
-            .time-box:nth-child(1),
-            .time-box:nth-child(2) {
-                border-bottom:
-                    1px solid var(--border);
-            }
+    .message-title{
+        font-size:36px;
+    }
 
-        }
 
+    .letter-intro{
+        font-size:14px;
+    }
 
-        @media (max-width: 420px) {
 
-            .reveal-header h1 {
-                font-size: 41px;
-            }
+    .message-content{
+        font-size:14px;
+        line-height:1.9;
+    }
 
 
-            .eyebrow {
-                font-size: 7px;
-            }
+    .message-footer{
+        align-items:flex-start;
 
+        flex-direction:column;
 
-            .eyebrow::before,
-            .eyebrow::after {
-                width: 16px;
-            }
+        gap:15px;
+    }
 
 
-            .message-card {
-                padding:
-                    32px
-                    20px
-                    25px;
-            }
+    .bottom-area{
+        align-items:stretch;
 
+        flex-direction:column;
 
-            .message-title {
-                font-size: 29px;
-            }
+        gap:14px;
+    }
 
-        }
 
-    </style>
+    .memory-note{
+        text-align:center;
+    }
+
+
+    .dashboard-button{
+        width:100%;
+    }
+
+
+    .countdown{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+
+    .time-box:nth-child(2){
+        border-right:none;
+    }
+
+
+    .time-box:nth-child(1),
+    .time-box:nth-child(2){
+        border-bottom:
+            1px solid var(--white-line);
+    }
+
+}
+
+
+@media(max-width:420px){
+
+    .reveal-header h1{
+        font-size:40px;
+    }
+
+
+    .eyebrow{
+        font-size:7px;
+    }
+
+
+    .eyebrow::before,
+    .eyebrow::after{
+        width:16px;
+    }
+
+
+    .message-card{
+        padding:
+            38px
+            22px
+            27px;
+    }
+
+
+    .message-title{
+        font-size:31px;
+    }
+
+
+    .letter-symbol{
+        width:30px;
+        height:30px;
+    }
+
+}
+
+</style>
 </head>
 
 
@@ -869,14 +959,9 @@
 
 <header class="topbar">
 
-    <a
-        href="dashboard.html"
-        class="brand"
-    >
+    <a href="dashboard.html" class="brand">
 
-        <span class="brand-mark">
-            A
-        </span>
+        <span class="brand-mark">A</span>
 
         <span class="brand-name">
             AFTERME
@@ -885,10 +970,7 @@
     </a>
 
 
-    <a
-        href="dashboard.html"
-        class="back-link"
-    >
+    <a href="dashboard.html" class="back-link">
         ← YOUR MESSAGES
     </a>
 
@@ -899,227 +981,276 @@
 <main>
 
 
-    <!-- REVEALED -->
+<!-- =========================
+     REVEALED MESSAGE
+========================= -->
 
-    <section
-        class="revealed"
-        id="revealedView"
-    >
+<section
+    class="revealed"
+    id="revealedView"
+>
 
-        <div class="reveal-header">
+    <div class="reveal-header">
 
-            <span class="eyebrow">
-                THE MOMENT HAS ARRIVED
-            </span>
-
-
-            <h1>
-                You left this
-                <em>for yourself.</em>
-            </h1>
+        <span class="eyebrow">
+            THE MOMENT HAS ARRIVED
+        </span>
 
 
-            <p class="subline">
-                A message from another version of you,
-                arriving exactly when you asked for it.
-            </p>
-
-        </div>
+        <h1>
+            You left this
+            <em>for yourself.</em>
+        </h1>
 
 
+        <p class="subline">
+            A message from another version of you,
+            arriving exactly when you asked for it.
+        </p>
 
-        <div class="message-wrapper">
+    </div>
 
-            <article class="message-card">
+
+
+    <div class="message-wrapper">
+
+        <article class="message-card">
+
+
+            <div class="letter-top">
 
                 <div class="message-label">
                     A MESSAGE FROM YOUR PAST SELF
                 </div>
 
 
-                <h2
-                    class="message-title"
-                    id="messageTitle"
-                >
-                    Your message
-                </h2>
+                <div class="letter-symbol">
+                    A
+                </div>
 
+            </div>
+
+
+
+            <h2
+                class="message-title"
+                id="messageTitle"
+            >
+                Your message
+            </h2>
+
+
+
+            <div class="letter-intro">
+                You wanted your future self to remember this.
+            </div>
+
+
+
+            <div
+                class="message-content"
+                id="messageContent"
+            ></div>
+
+
+
+            <div class="signature">
+                — From the you who started.
+            </div>
+
+
+
+            <div class="message-footer">
 
                 <div
-                    class="message-content"
-                    id="messageContent"
-                ></div>
-
-
-                <div class="message-footer">
-
-                    <div
-                        class="written"
-                        id="messageDate"
-                    >
-                        WRITTEN —
-                    </div>
-
-
-                    <div class="opened-mark">
-
-                        <span class="opened-dot"></span>
-
-                        OPENED
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-
-            <div class="bottom-area">
-
-                <div class="memory-note">
-                    SOME THINGS ARE WORTH WAITING FOR.
-                </div>
-
-
-                <a
-                    href="dashboard.html"
-                    class="dashboard-button"
+                    class="written"
+                    id="messageDate"
                 >
-                    ← BACK TO YOUR MESSAGES
-                </a>
+                    WRITTEN —
+                </div>
+
+
+                <div class="opened-mark">
+
+                    <span class="opened-dot"></span>
+
+                    OPENED
+
+                </div>
 
             </div>
 
+
+        </article>
+
+
+
+        <div class="bottom-area">
+
+            <div class="memory-note">
+                SOME THINGS ARE WORTH WAITING FOR.
+            </div>
+
+
+            <a
+                href="dashboard.html"
+                class="dashboard-button"
+            >
+                ← BACK TO YOUR MESSAGES
+            </a>
+
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
 
-    <!-- LOCKED -->
+<!-- =========================
+     LOCKED
+========================= -->
 
-    <section
-        class="locked"
-        id="lockedView"
-        style="display:none;"
+<section
+    class="locked"
+    id="lockedView"
+    style="display:none;"
+>
+
+    <div class="lock-icon">
+        ∞
+    </div>
+
+
+    <span
+        class="eyebrow"
+        style="margin-top:32px;"
     >
-
-        <div class="lock-icon">
-            ∞
-        </div>
+        MESSAGE SEALED
+    </span>
 
 
-        <span
-            class="eyebrow"
-            style="margin-top:32px;"
-        >
-            MESSAGE SEALED
-        </span>
+    <h1>
+        Not yet.
+        <em>Wait.</em>
+    </h1>
 
 
-        <h1>
-            Not yet.
-            <em>Wait.</em>
-        </h1>
+    <p class="locked-copy">
+        Something from your past is waiting
+        for the right moment.
+    </p>
 
 
-        <p class="locked-copy">
-            Something from your past is waiting
-            for the right moment.
-        </p>
+    <div class="countdown">
 
+        <div class="time-box">
 
-        <div class="countdown">
+            <span
+                class="number"
+                id="days"
+            >
+                00
+            </span>
 
-            <div class="time-box">
-                <span
-                    class="number"
-                    id="days"
-                >00</span>
-
-                <span class="unit">
-                    DAYS
-                </span>
-            </div>
-
-
-            <div class="time-box">
-                <span
-                    class="number"
-                    id="hours"
-                >00</span>
-
-                <span class="unit">
-                    HOURS
-                </span>
-            </div>
-
-
-            <div class="time-box">
-                <span
-                    class="number"
-                    id="minutes"
-                >00</span>
-
-                <span class="unit">
-                    MINUTES
-                </span>
-            </div>
-
-
-            <div class="time-box">
-                <span
-                    class="number"
-                    id="seconds"
-                >00</span>
-
-                <span class="unit">
-                    SECONDS
-                </span>
-            </div>
+            <span class="unit">
+                DAYS
+            </span>
 
         </div>
 
 
-        <div
-            class="reveal-date"
-            id="revealDate"
-        >
-            REVEAL DATE — LOADING
+        <div class="time-box">
+
+            <span
+                class="number"
+                id="hours"
+            >
+                00
+            </span>
+
+            <span class="unit">
+                HOURS
+            </span>
+
         </div>
 
-    </section>
+
+        <div class="time-box">
+
+            <span
+                class="number"
+                id="minutes"
+            >
+                00
+            </span>
+
+            <span class="unit">
+                MINUTES
+            </span>
+
+        </div>
 
 
+        <div class="time-box">
 
-    <!-- ERROR -->
+            <span
+                class="number"
+                id="seconds"
+            >
+                00
+            </span>
 
-    <section
-        class="error-state"
-        id="errorView"
+            <span class="unit">
+                SECONDS
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="reveal-date"
+        id="revealDate"
     >
+        REVEAL DATE — LOADING
+    </div>
 
-        <h1>
-            Message not found.
-        </h1>
-
-
-        <p>
-            This message may no longer exist
-            or you may not have access to it.
-        </p>
+</section>
 
 
-        <a
-            href="dashboard.html"
-            class="dashboard-button"
-            style="margin-top:28px;"
-        >
-            ← BACK TO DASHBOARD
-        </a>
 
-    </section>
+<!-- =========================
+     ERROR
+========================= -->
+
+<section
+    class="error-state"
+    id="errorView"
+>
+
+    <h1>
+        Message not found.
+    </h1>
+
+
+    <p>
+        This message may no longer exist
+        or you may not have access to it.
+    </p>
+
+
+    <a
+        href="dashboard.html"
+        class="dashboard-button"
+        style="margin-top:28px;"
+    >
+        ← BACK TO DASHBOARD
+    </a>
+
+</section>
+
 
 </main>
 
@@ -1138,42 +1269,32 @@ const client = window.aftermeSupabase;
 const lockedView =
     document.getElementById("lockedView");
 
-
 const revealedView =
     document.getElementById("revealedView");
-
 
 const errorView =
     document.getElementById("errorView");
 
-
 const messageTitle =
     document.getElementById("messageTitle");
-
 
 const messageContent =
     document.getElementById("messageContent");
 
-
 const messageDate =
     document.getElementById("messageDate");
-
 
 const daysElement =
     document.getElementById("days");
 
-
 const hoursElement =
     document.getElementById("hours");
-
 
 const minutesElement =
     document.getElementById("minutes");
 
-
 const secondsElement =
     document.getElementById("seconds");
-
 
 const revealDateElement =
     document.getElementById("revealDate");
@@ -1185,7 +1306,7 @@ let countdownTimer = null;
 
 
 
-function getMessageId() {
+function getMessageId(){
 
     const params =
         new URLSearchParams(
@@ -1198,19 +1319,19 @@ function getMessageId() {
 
 
 
-function formatDate(date) {
+function formatDate(date){
 
     return date.toLocaleString(
         undefined,
         {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
+            day:"2-digit",
+            month:"long",
+            year:"numeric",
 
-            hour: "2-digit",
-            minute: "2-digit",
+            hour:"2-digit",
+            minute:"2-digit",
 
-            hour12: true
+            hour12:true
         }
     ).toUpperCase();
 
@@ -1218,7 +1339,7 @@ function formatDate(date) {
 
 
 
-function showError() {
+function showError(){
 
     revealedView.style.display =
         "none";
@@ -1233,9 +1354,9 @@ function showError() {
 
 
 
-function updateCountdown() {
+function updateCountdown(){
 
-    if (!targetDate) return;
+    if(!targetDate) return;
 
 
     const difference =
@@ -1243,7 +1364,7 @@ function updateCountdown() {
         - Date.now();
 
 
-    if (difference <= 0) {
+    if(difference <= 0){
 
         clearInterval(
             countdownTimer
@@ -1287,25 +1408,22 @@ function updateCountdown() {
 
 
     daysElement.textContent =
-        String(days).padStart(2, "0");
-
+        String(days).padStart(2,"0");
 
     hoursElement.textContent =
-        String(hours).padStart(2, "0");
-
+        String(hours).padStart(2,"0");
 
     minutesElement.textContent =
-        String(minutes).padStart(2, "0");
-
+        String(minutes).padStart(2,"0");
 
     secondsElement.textContent =
-        String(seconds).padStart(2, "0");
+        String(seconds).padStart(2,"0");
 
 }
 
 
 
-function showRevealedMessage(data) {
+function showRevealedMessage(data){
 
     clearInterval(
         countdownTimer
@@ -1315,24 +1433,24 @@ function showRevealedMessage(data) {
     lockedView.style.display =
         "none";
 
-
     errorView.style.display =
         "none";
-
 
     revealedView.style.display =
         "block";
 
 
     messageTitle.textContent =
-        data.title || "Your message";
+        data.title ||
+        "Your message";
 
 
     messageContent.textContent =
-        data.message || "";
+        data.message ||
+        "";
 
 
-    if (data.created_at) {
+    if(data.created_at){
 
         messageDate.textContent =
             `WRITTEN ${formatDate(
@@ -1347,9 +1465,9 @@ function showRevealedMessage(data) {
 
 
 
-async function loadMessage() {
+async function loadMessage(){
 
-    if (!client) {
+    if(!client){
 
         showError();
 
@@ -1359,17 +1477,17 @@ async function loadMessage() {
 
 
     const {
-        data: userData,
-        error: userError
+        data:userData,
+        error:userError
     } =
         await client.auth.getUser();
 
 
-    if (
+    if(
         userError ||
         !userData ||
         !userData.user
-    ) {
+    ){
 
         window.location.href =
             "login.html";
@@ -1383,7 +1501,7 @@ async function loadMessage() {
         getMessageId();
 
 
-    if (!messageId) {
+    if(!messageId){
 
         showError();
 
@@ -1397,25 +1515,25 @@ async function loadMessage() {
         error
     } =
         await client
-            .from("messages")
-            .select(
-                "id, user_id, title, message, reveal_at, status, created_at"
-            )
-            .eq(
-                "id",
-                messageId
-            )
-            .eq(
-                "user_id",
-                userData.user.id
-            )
-            .maybeSingle();
+        .from("messages")
+        .select(
+            "id,user_id,title,message,reveal_at,status,created_at"
+        )
+        .eq(
+            "id",
+            messageId
+        )
+        .eq(
+            "user_id",
+            userData.user.id
+        )
+        .maybeSingle();
 
 
-    if (
+    if(
         error ||
         !data
-    ) {
+    ){
 
         console.error(error);
 
@@ -1432,19 +1550,17 @@ async function loadMessage() {
         );
 
 
-    if (
+    if(
         Date.now()
         <
         targetDate.getTime()
-    ) {
+    ){
 
         revealedView.style.display =
             "none";
 
-
         errorView.style.display =
             "none";
-
 
         lockedView.style.display =
             "block";
@@ -1484,7 +1600,6 @@ async function loadMessage() {
 loadMessage();
 
 </script>
-
 
 </body>
 </html>
