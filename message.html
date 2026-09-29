@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -13,7 +14,7 @@
 
     <meta
         name="description"
-        content="A private message waiting for its moment."
+        content="A message from your past self."
     >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,40 +30,81 @@
         rel="stylesheet"
     >
 
+
     <style>
 
         :root {
-            --bg: #050506;
-            --surface: #0b0c0f;
-            --text: #ebe9e2;
-            --muted: #85858a;
-            --dim: #55565b;
-            --accent: #55d9ff;
-            --line: rgba(235,233,226,.09);
-            --line-strong: rgba(235,233,226,.17);
 
-            --serif: "Playfair Display", serif;
-            --sans: "Inter", sans-serif;
-            --mono: "DM Mono", monospace;
+            --bg: #050506;
+
+            --surface: #0b0c0f;
+
+            --text: #ebe9e2;
+
+            --muted: #85858a;
+
+            --dim: #55565b;
+
+            --accent: #55d9ff;
+
+            --accent-soft:
+                rgba(85, 217, 255, .08);
+
+            --line:
+                rgba(235, 233, 226, .09);
+
+            --line-strong:
+                rgba(235, 233, 226, .16);
+
+            --serif:
+                "Playfair Display", serif;
+
+            --sans:
+                "Inter", sans-serif;
+
+            --mono:
+                "DM Mono", monospace;
+
         }
 
 
         * {
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
+
+        }
+
+
+        html,
+        body {
+
+            min-height: 100%;
+
         }
 
 
         body {
+
             min-height: 100vh;
 
             background:
+
                 radial-gradient(
-                    circle at 50% 35%,
-                    rgba(85,217,255,.055),
+                    circle at 50% 20%,
+                    rgba(85, 217, 255, .055),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 10% 90%,
+                    rgba(85, 217, 255, .025),
                     transparent 30%
                 ),
+
                 var(--bg);
 
             color: var(--text);
@@ -70,24 +112,25 @@
             font-family: var(--sans);
 
             overflow-x: hidden;
-        }
 
-
-        button {
-            font: inherit;
         }
 
 
         a {
+
             color: inherit;
+
             text-decoration: none;
+
         }
 
 
-        /* BACKGROUND */
+        /* GRID */
 
         .grid {
+
             position: fixed;
+
             inset: 0;
 
             pointer-events: none;
@@ -95,10 +138,12 @@
             opacity: .10;
 
             background-image:
+
                 linear-gradient(
                     rgba(255,255,255,.025) 1px,
                     transparent 1px
                 ),
+
                 linear-gradient(
                     90deg,
                     rgba(255,255,255,.025) 1px,
@@ -113,12 +158,14 @@
                     black,
                     transparent 75%
                 );
+
         }
 
 
         /* NAV */
 
         .topbar {
+
             height: 82px;
 
             padding: 0 5vw;
@@ -129,25 +176,31 @@
 
             justify-content: space-between;
 
-            border-bottom: 1px solid var(--line);
+            border-bottom:
+                1px solid var(--line);
 
             position: relative;
 
             z-index: 5;
+
         }
 
 
         .brand {
+
             display: flex;
 
             align-items: center;
 
             gap: 13px;
+
         }
 
 
         .brand-mark {
+
             width: 30px;
+
             height: 30px;
 
             position: relative;
@@ -156,37 +209,48 @@
 
             place-items: center;
 
-            border: 1px solid var(--accent);
+            border:
+                1px solid var(--accent);
 
             border-radius: 50%;
 
             font-family: var(--mono);
 
             font-size: 10px;
+
         }
 
 
         .brand-orbit {
+
             position: absolute;
 
             width: 43px;
+
             height: 15px;
 
-            border: 1px solid rgba(85,217,255,.45);
+            border:
+                1px solid
+                rgba(85, 217, 255, .45);
 
             border-radius: 50%;
 
-            transform: rotate(-28deg);
+            transform:
+                rotate(-28deg);
+
         }
 
 
         .brand-dot {
+
             position: absolute;
 
             width: 4px;
+
             height: 4px;
 
             right: -6px;
+
             top: -5px;
 
             background: var(--accent);
@@ -195,19 +259,23 @@
 
             box-shadow:
                 0 0 12px var(--accent);
+
         }
 
 
         .brand-name {
+
             font-family: var(--mono);
 
             font-size: 12px;
 
             letter-spacing: .2em;
+
         }
 
 
         .back {
+
             color: var(--muted);
 
             font-family: var(--mono);
@@ -215,35 +283,93 @@
             font-size: 8px;
 
             letter-spacing: .1em;
+
         }
 
 
         .back:hover {
-            color: var(--accent);
+
+            color: var(--text);
+
         }
 
 
         /* MAIN */
 
         main {
-            width: min(850px, 90%);
+
+            width:
+                min(900px, 90%);
 
             margin: 0 auto;
 
-            padding: 90px 0 120px;
+            padding:
+                85px 0 110px;
 
             position: relative;
 
             z-index: 2;
+
         }
 
 
-        .state {
+        /* LOCKED */
+
+        .locked {
+
             text-align: center;
+
+        }
+
+
+        .lock-symbol {
+
+            width: 92px;
+
+            height: 92px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(85, 217, 255, .25);
+
+            color: var(--accent);
+
+            font-family: var(--mono);
+
+            font-size: 24px;
+
+            position: relative;
+
+        }
+
+
+        .lock-symbol::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: -12px;
+
+            border:
+                1px solid
+                rgba(85, 217, 255, .07);
+
+            border-radius: 50%;
+
         }
 
 
         .eyebrow {
+
+            margin-top: 42px;
+
             color: var(--accent);
 
             font-family: var(--mono);
@@ -251,266 +377,221 @@
             font-size: 8px;
 
             letter-spacing: .18em;
+
         }
 
 
-        /* LOCK */
+        .locked h1 {
 
-        .lock {
-            width: 115px;
-            height: 115px;
+            margin-top: 20px;
 
-            margin: 45px auto 35px;
+            font-size:
+                clamp(42px, 6vw, 72px);
 
-            border: 1px solid rgba(85,217,255,.3);
-
-            border-radius: 50%;
-
-            display: grid;
-
-            place-items: center;
-
-            position: relative;
-
-            box-shadow:
-                0 0 60px rgba(85,217,255,.035);
-        }
-
-
-        .lock::before {
-            content: "";
-
-            position: absolute;
-
-            inset: 12px;
-
-            border: 1px solid rgba(85,217,255,.12);
-
-            border-radius: 50%;
-        }
-
-
-        .lock-icon {
-            font-family: var(--mono);
-
-            color: var(--accent);
-
-            font-size: 28px;
-        }
-
-
-        .state h1 {
-            font-size: clamp(42px, 7vw, 70px);
-
-            line-height: .95;
+            line-height: 1;
 
             letter-spacing: -.055em;
 
             font-weight: 500;
+
         }
 
 
-        .state h1 em {
-            color: var(--accent);
+        .locked h1 em {
 
             font-family: var(--serif);
 
             font-weight: 500;
+
+            color: var(--accent);
+
         }
 
 
-        .description {
+        .locked-copy {
+
             max-width: 500px;
 
-            margin: 25px auto 0;
+            margin: 24px auto 0;
 
             color: var(--muted);
 
-            font-size: 12px;
+            font-size: 13px;
 
             line-height: 1.9;
+
         }
 
 
-        /* DATE */
+        /* COUNTDOWN */
 
-        .reveal-box {
-            max-width: 560px;
+        .countdown {
 
             margin: 55px auto 0;
 
-            padding: 27px;
+            display: grid;
 
-            border: 1px solid var(--line);
+            grid-template-columns:
+                repeat(4, 1fr);
 
-            background: rgba(11,12,15,.72);
+            max-width: 620px;
+
+            border:
+                1px solid var(--line);
+
+            background:
+                rgba(11, 12, 15, .72);
+
         }
 
 
-        .reveal-label {
+        .time-box {
+
+            padding: 28px 12px;
+
+            border-right:
+                1px solid var(--line);
+
+        }
+
+
+        .time-box:last-child {
+
+            border-right: none;
+
+        }
+
+
+        .number {
+
+            display: block;
+
+            font-family: var(--mono);
+
+            font-size: clamp(24px, 4vw, 38px);
+
+            color: var(--text);
+
+        }
+
+
+        .unit {
+
+            display: block;
+
+            margin-top: 8px;
+
             color: var(--dim);
 
             font-family: var(--mono);
 
             font-size: 7px;
 
-            letter-spacing: .16em;
+            letter-spacing: .12em;
+
         }
 
 
         .reveal-date {
-            margin-top: 13px;
 
-            color: var(--text);
+            margin-top: 25px;
 
-            font-family: var(--mono);
-
-            font-size: 15px;
-
-            letter-spacing: .05em;
-        }
-
-
-        .countdown {
-            margin-top: 20px;
-
-            color: var(--accent);
-
-            font-family: var(--mono);
-
-            font-size: 10px;
-
-            letter-spacing: .08em;
-        }
-
-
-        /* TITLE */
-
-        .sealed-title {
-            margin-top: 45px;
-
-            color: var(--muted);
-
-            font-family: var(--serif);
-
-            font-size: 18px;
-
-            font-style: italic;
-        }
-
-
-        /* BUTTON */
-
-        .back-button {
-            margin-top: 45px;
-
-            min-width: 190px;
-
-            height: 48px;
-
-            border: 1px solid var(--line-strong);
-
-            background: transparent;
-
-            color: var(--muted);
+            color: var(--dim);
 
             font-family: var(--mono);
 
             font-size: 8px;
 
-            letter-spacing: .12em;
+            letter-spacing: .08em;
 
-            transition: .25s ease;
-        }
-
-
-        .back-button:hover {
-            border-color: var(--accent);
-
-            color: var(--accent);
         }
 
 
         /* REVEALED */
 
         .revealed {
+
             display: none;
+
         }
 
 
-        .revealed .reveal-symbol {
-            width: 70px;
-            height: 70px;
+        .revealed-head {
 
-            margin: 40px auto 30px;
+            text-align: center;
 
-            display: grid;
+        }
 
-            place-items: center;
 
-            border: 1px solid var(--accent);
+        .revealed .eyebrow {
 
-            border-radius: 50%;
+            display: block;
 
-            color: var(--accent);
+            margin-top: 0;
 
-            font-family: var(--serif);
-
-            font-size: 28px;
-
-            box-shadow:
-                0 0 45px rgba(85,217,255,.08);
         }
 
 
         .revealed h1 {
-            font-size: clamp(40px, 7vw, 66px);
+
+            margin-top: 20px;
+
+            font-size:
+                clamp(42px, 6vw, 70px);
 
             line-height: 1;
 
-            letter-spacing: -.05em;
+            letter-spacing: -.055em;
 
             font-weight: 500;
+
         }
 
 
         .revealed h1 em {
-            color: var(--accent);
 
             font-family: var(--serif);
 
+            color: var(--accent);
+
             font-weight: 500;
+
         }
 
 
         .message-paper {
-            margin: 55px auto 0;
 
-            max-width: 700px;
+            max-width: 720px;
+
+            margin: 55px auto 0;
 
             padding: 45px;
 
-            border: 1px solid var(--line);
+            border:
+                1px solid var(--line);
 
-            background: var(--surface);
+            background:
+                rgba(11, 12, 15, .8);
 
-            text-align: left;
         }
 
 
-        .message-paper .message-title {
+        .message-title {
+
             font-family: var(--serif);
 
             font-size: 27px;
 
             line-height: 1.3;
+
         }
 
 
-        .message-paper .message-body {
+        .message-content {
+
             margin-top: 30px;
 
-            color: #b9b8b4;
+            color: var(--muted);
 
             font-size: 14px;
 
@@ -518,16 +599,17 @@
 
             white-space: pre-wrap;
 
-            overflow-wrap: anywhere;
         }
 
 
-        .message-meta {
+        .message-date {
+
             margin-top: 35px;
 
             padding-top: 18px;
 
-            border-top: 1px solid var(--line);
+            border-top:
+                1px solid var(--line);
 
             color: var(--dim);
 
@@ -535,70 +617,130 @@
 
             font-size: 7px;
 
-            letter-spacing: .08em;
+            letter-spacing: .1em;
+
+        }
+
+
+        .dashboard-link {
+
+            display: block;
+
+            width: fit-content;
+
+            margin: 30px auto 0;
+
+            padding: 13px 18px;
+
+            border:
+                1px solid
+                rgba(85, 217, 255, .3);
+
+            color: var(--muted);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .1em;
+
+        }
+
+
+        .dashboard-link:hover {
+
+            background:
+                var(--accent-soft);
+
+            color: var(--text);
+
         }
 
 
         /* ERROR */
 
         .error-state {
+
             display: none;
 
             text-align: center;
+
+            padding-top: 80px;
+
         }
 
 
         .error-state h1 {
-            margin-top: 25px;
 
-            font-size: 42px;
+            font-size: 48px;
 
             font-weight: 500;
+
         }
 
 
         .error-state p {
-            max-width: 450px;
 
-            margin: 15px auto 0;
+            margin-top: 18px;
 
             color: var(--muted);
 
-            font-size: 12px;
+            font-size: 13px;
 
-            line-height: 1.8;
         }
 
+
+        /* MOBILE */
 
         @media (max-width: 600px) {
 
             .topbar {
+
                 height: 75px;
 
                 padding: 0 20px;
+
             }
 
 
             main {
-                width: calc(100% - 40px);
+
+                width:
+                    calc(100% - 40px);
 
                 padding-top: 60px;
+
             }
 
 
-            .lock {
-                width: 95px;
-                height: 95px;
+            .countdown {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
             }
 
 
-            .reveal-box {
-                padding: 22px 18px;
+            .time-box:nth-child(2) {
+
+                border-right: none;
+
+            }
+
+
+            .time-box:nth-child(1),
+            .time-box:nth-child(2) {
+
+                border-bottom:
+                    1px solid var(--line);
+
             }
 
 
             .message-paper {
-                padding: 28px 20px;
+
+                padding: 25px;
+
             }
 
         }
@@ -630,6 +772,7 @@
 
             </span>
 
+
             <span class="brand-name">
                 AFTERME
             </span>
@@ -641,7 +784,7 @@
             href="dashboard.html"
             class="back"
         >
-            ← BACK TO SPACE
+            ← DASHBOARD
         </a>
 
     </header>
@@ -649,24 +792,20 @@
 
     <main>
 
-        <!-- LOCKED STATE -->
+        <!-- LOCKED -->
 
         <section
-            class="state"
-            id="lockedState"
+            class="locked"
+            id="lockedView"
         >
 
-            <span class="eyebrow">
+            <div class="lock-symbol">
+                ∞
+            </div>
+
+
+            <div class="eyebrow">
                 MESSAGE SEALED
-            </span>
-
-
-            <div class="lock">
-
-                <div class="lock-icon">
-                    ⌁
-                </div>
-
             </div>
 
 
@@ -676,113 +815,148 @@
             </h1>
 
 
-            <p class="description">
-                You left these words for another version
-                of yourself. They're still waiting for
-                their moment.
+            <p
+                class="locked-copy"
+                id="lockedCopy"
+            >
+                Something from your past is waiting
+                for the right moment.
             </p>
 
 
-            <div class="reveal-box">
+            <div
+                class="countdown"
+                id="countdown"
+            >
 
-                <div class="reveal-label">
-                    THIS MESSAGE OPENS
+                <div class="time-box">
+
+                    <span
+                        class="number"
+                        id="days"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        DAYS
+                    </span>
+
                 </div>
 
 
-                <div
-                    class="reveal-date"
-                    id="revealDate"
-                >
-                    —
+                <div class="time-box">
+
+                    <span
+                        class="number"
+                        id="hours"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        HOURS
+                    </span>
+
                 </div>
 
 
-                <div
-                    class="countdown"
-                    id="countdown"
-                >
-                    CALCULATING...
+                <div class="time-box">
+
+                    <span
+                        class="number"
+                        id="minutes"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        MINUTES
+                    </span>
+
+                </div>
+
+
+                <div class="time-box">
+
+                    <span
+                        class="number"
+                        id="seconds"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        SECONDS
+                    </span>
+
                 </div>
 
             </div>
 
 
             <div
-                class="sealed-title"
-                id="sealedTitle"
+                class="reveal-date"
+                id="revealDate"
             >
-                —
+                REVEAL DATE — LOADING
             </div>
-
-
-            <button
-                class="back-button"
-                id="lockedBack"
-            >
-                BACK TO YOUR MESSAGES
-            </button>
 
         </section>
 
 
-        <!-- REVEALED STATE -->
+        <!-- REVEALED -->
 
         <section
-            class="state revealed"
-            id="revealedState"
+            class="revealed"
+            id="revealedView"
         >
 
-            <span class="eyebrow">
-                THE MOMENT HAS ARRIVED
-            </span>
+            <div class="revealed-head">
+
+                <span class="eyebrow">
+                    THE MOMENT HAS ARRIVED
+                </span>
 
 
-            <div class="reveal-symbol">
-                ∞
+                <h1>
+                    You left this
+                    <em>for yourself.</em>
+                </h1>
+
             </div>
 
 
-            <h1>
-                You made it
-                <em>here.</em>
-            </h1>
+            <article class="message-paper">
 
-
-            <div class="message-paper">
-
-                <div
+                <h2
                     class="message-title"
                     id="messageTitle"
                 >
-                    —
-                </div>
+                    Message
+                </h2>
 
 
                 <div
-                    class="message-body"
-                    id="messageBody"
-                >
-                    —
-                </div>
+                    class="message-content"
+                    id="messageContent"
+                ></div>
 
 
                 <div
-                    class="message-meta"
-                    id="messageMeta"
-                >
-                    —
-                </div>
+                    class="message-date"
+                    id="messageDate"
+                ></div>
 
-            </div>
+            </article>
 
 
-            <button
-                class="back-button"
-                id="revealedBack"
+            <a
+                href="dashboard.html"
+                class="dashboard-link"
             >
-                BACK TO YOUR MESSAGES
-            </button>
+                ← BACK TO YOUR MESSAGES
+            </a>
 
         </section>
 
@@ -791,31 +965,26 @@
 
         <section
             class="error-state"
-            id="errorState"
+            id="errorView"
         >
-
-            <span class="eyebrow">
-                AFTERME
-            </span>
-
 
             <h1>
                 Message not found.
             </h1>
 
 
-            <p id="errorText">
+            <p>
                 This message may no longer exist
                 or you may not have access to it.
             </p>
 
 
-            <button
-                class="back-button"
-                id="errorBack"
+            <a
+                href="dashboard.html"
+                class="dashboard-link"
             >
-                BACK TO YOUR MESSAGES
-            </button>
+                ← BACK TO DASHBOARD
+            </a>
 
         </section>
 
@@ -833,21 +1002,45 @@
             window.aftermeSupabase;
 
 
-        const lockedState =
+        const lockedView =
             document.getElementById(
-                "lockedState"
+                "lockedView"
             );
 
 
-        const revealedState =
+        const revealedView =
             document.getElementById(
-                "revealedState"
+                "revealedView"
             );
 
 
-        const errorState =
+        const errorView =
             document.getElementById(
-                "errorState"
+                "errorView"
+            );
+
+
+        const daysElement =
+            document.getElementById(
+                "days"
+            );
+
+
+        const hoursElement =
+            document.getElementById(
+                "hours"
+            );
+
+
+        const minutesElement =
+            document.getElementById(
+                "minutes"
+            );
+
+
+        const secondsElement =
+            document.getElementById(
+                "seconds"
             );
 
 
@@ -857,41 +1050,25 @@
             );
 
 
-        const countdownElement =
-            document.getElementById(
-                "countdown"
-            );
-
-
-        const sealedTitle =
-            document.getElementById(
-                "sealedTitle"
-            );
-
-
         const messageTitle =
             document.getElementById(
                 "messageTitle"
             );
 
 
-        const messageBody =
+        const messageContent =
             document.getElementById(
-                "messageBody"
+                "messageContent"
             );
 
 
-        const messageMeta =
+        const messageDate =
             document.getElementById(
-                "messageMeta"
+                "messageDate"
             );
 
 
-        const errorText =
-            document.getElementById(
-                "errorText"
-            );
-
+        let targetDate = null;
 
         let countdownTimer = null;
 
@@ -913,7 +1090,43 @@
 
 
         /* =========================
-           DATE FORMAT
+           ESCAPE HTML
+        ========================= */
+
+        function escapeHtml(value) {
+
+            return String(value)
+
+                .replaceAll(
+                    "&",
+                    "&amp;"
+                )
+
+                .replaceAll(
+                    "<",
+                    "&lt;"
+                )
+
+                .replaceAll(
+                    ">",
+                    "&gt;"
+                )
+
+                .replaceAll(
+                    '"',
+                    "&quot;"
+                )
+
+                .replaceAll(
+                    "'",
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =========================
+           FORMAT DATE
         ========================= */
 
         function formatDate(date) {
@@ -927,94 +1140,7 @@
                     hour: "2-digit",
                     minute: "2-digit"
                 }
-            );
-
-        }
-
-
-        /* =========================
-           COUNTDOWN
-        ========================= */
-
-        function startCountdown(revealAt) {
-
-            if (countdownTimer) {
-
-                clearInterval(
-                    countdownTimer
-                );
-
-            }
-
-
-            function update() {
-
-                const difference =
-                    revealAt.getTime() -
-                    Date.now();
-
-
-                if (difference <= 0) {
-
-                    countdownElement.textContent =
-                        "THE MOMENT HAS ARRIVED";
-
-                    clearInterval(
-                        countdownTimer
-                    );
-
-                    loadMessage();
-
-                    return;
-
-                }
-
-
-                const totalSeconds =
-                    Math.floor(
-                        difference / 1000
-                    );
-
-
-                const days =
-                    Math.floor(
-                        totalSeconds /
-                        86400
-                    );
-
-
-                const hours =
-                    Math.floor(
-                        (totalSeconds % 86400) /
-                        3600
-                    );
-
-
-                const minutes =
-                    Math.floor(
-                        (totalSeconds % 3600) /
-                        60
-                    );
-
-
-                const seconds =
-                    totalSeconds % 60;
-
-
-                countdownElement.textContent =
-                    `${days}D  ${hours}H  ${minutes}M  ${seconds}S`;
-
-            }
-
-
-            update();
-
-
-            countdownTimer =
-                setInterval(
-                    update,
-                    1000
-                );
+            ).toUpperCase();
 
         }
 
@@ -1023,19 +1149,104 @@
            SHOW ERROR
         ========================= */
 
-        function showError(text) {
+        function showError() {
 
-            lockedState.style.display =
+            lockedView.style.display =
                 "none";
 
-            revealedState.style.display =
+            revealedView.style.display =
                 "none";
 
-            errorState.style.display =
+            errorView.style.display =
                 "block";
 
-            errorText.textContent =
-                text;
+        }
+
+
+        /* =========================
+           COUNTDOWN
+        ========================= */
+
+        function updateCountdown() {
+
+            if (!targetDate) {
+                return;
+            }
+
+
+            const now =
+                Date.now();
+
+
+            const target =
+                targetDate.getTime();
+
+
+            const difference =
+                target - now;
+
+
+            if (difference <= 0) {
+
+                clearInterval(
+                    countdownTimer
+                );
+
+                revealMessage();
+
+                return;
+
+            }
+
+
+            const totalSeconds =
+                Math.floor(
+                    difference / 1000
+                );
+
+
+            const days =
+                Math.floor(
+                    totalSeconds / 86400
+                );
+
+
+            const hours =
+                Math.floor(
+                    (totalSeconds % 86400) /
+                    3600
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (totalSeconds % 3600) /
+                    60
+                );
+
+
+            const seconds =
+                totalSeconds % 60;
+
+
+            daysElement.textContent =
+                String(days)
+                    .padStart(2, "0");
+
+
+            hoursElement.textContent =
+                String(hours)
+                    .padStart(2, "0");
+
+
+            minutesElement.textContent =
+                String(minutes)
+                    .padStart(2, "0");
+
+
+            secondsElement.textContent =
+                String(seconds)
+                    .padStart(2, "0");
 
         }
 
@@ -1048,24 +1259,7 @@
 
             if (!client) {
 
-                showError(
-                    "AFTERME could not connect to its secure database."
-                );
-
-                return;
-
-            }
-
-
-            const messageId =
-                getMessageId();
-
-
-            if (!messageId) {
-
-                showError(
-                    "No message was selected."
-                );
+                showError();
 
                 return;
 
@@ -1093,179 +1287,151 @@
             }
 
 
+            const user =
+                userData.user;
+
+
+            const messageId =
+                getMessageId();
+
+
+            if (!messageId) {
+
+                showError();
+
+                return;
+
+            }
+
+
             const {
-                data: message,
+                data,
                 error
             } =
                 await client
+
                     .from("messages")
-                    .select("*")
-                    .eq("id", messageId)
+
+                    .select(
+                        "id, user_id, title, message, reveal_at, status, created_at"
+                    )
+
+                    .eq(
+                        "id",
+                        messageId
+                    )
+
                     .eq(
                         "user_id",
-                        userData.user.id
+                        user.id
                     )
-                    .single();
+
+                    .maybeSingle();
 
 
-            if (error || !message) {
+            if (
+                error ||
+                !data
+            ) {
 
                 console.error(
-                    "Message loading error:",
+                    "Could not load message:",
                     error
                 );
 
-                showError(
-                    "This message could not be found."
-                );
+                showError();
 
                 return;
 
             }
 
 
-            const revealAt =
+            targetDate =
                 new Date(
-                    message.reveal_at
+                    data.reveal_at
                 );
 
 
-            const now =
-                new Date();
-
-
-            const isRevealed =
-                now.getTime() >=
-                revealAt.getTime();
-
-
-            /* =========================
-               LOCKED
-            ========================= */
-
-            if (!isRevealed) {
-
-                lockedState.style.display =
-                    "block";
-
-                revealedState.style.display =
-                    "none";
-
-
-                revealDateElement.textContent =
-                    formatDate(
-                        revealAt
-                    );
-
-
-                sealedTitle.textContent =
-                    message.title;
-
-
-                startCountdown(
-                    revealAt
-                );
-
-
-                return;
-
-            }
-
-
-            /* =========================
-               REVEALED
-            ========================= */
-
-            lockedState.style.display =
-                "none";
-
-            revealedState.style.display =
-                "block";
-
-
-            messageTitle.textContent =
-                message.title;
-
-
-            messageBody.textContent =
-                message.message;
-
-
-            messageMeta.textContent =
-                `SEALED ${formatDate(
-                    new Date(message.created_at)
-                )}  /  REVEALED ${formatDate(
-                    revealAt
+            revealDateElement.textContent =
+                `REVEALS — ${formatDate(
+                    targetDate
                 )}`;
 
 
-            /* Update database status */
-
             if (
-                message.status !==
-                "revealed"
+                Date.now() <
+                targetDate.getTime()
             ) {
 
-                await client
-                    .from("messages")
-                    .update({
-                        status: "revealed"
-                    })
-                    .eq(
-                        "id",
-                        message.id
-                    )
-                    .eq(
-                        "user_id",
-                        userData.user.id
+                lockedView.style.display =
+                    "block";
+
+                revealedView.style.display =
+                    "none";
+
+                updateCountdown();
+
+
+                countdownTimer =
+                    setInterval(
+                        updateCountdown,
+                        1000
                     );
 
+
+                return;
+
             }
+
+
+            showRevealedMessage(
+                data
+            );
 
         }
 
 
         /* =========================
-           BACK BUTTONS
+           REVEAL MESSAGE
         ========================= */
 
-        document
-            .getElementById("lockedBack")
-            .addEventListener(
-                "click",
-                () => {
+        function revealMessage() {
 
-                    window.location.href =
-                        "dashboard.html";
+            loadMessage();
 
-                }
-            );
+        }
 
 
-        document
-            .getElementById("revealedBack")
-            .addEventListener(
-                "click",
-                () => {
+        function showRevealedMessage(
+            data
+        ) {
 
-                    window.location.href =
-                        "dashboard.html";
+            lockedView.style.display =
+                "none";
 
-                }
-            );
+            errorView.style.display =
+                "none";
+
+            revealedView.style.display =
+                "block";
 
 
-        document
-            .getElementById("errorBack")
-            .addEventListener(
-                "click",
-                () => {
+            messageTitle.textContent =
+                data.title;
 
-                    window.location.href =
-                        "dashboard.html";
 
-                }
-            );
+            messageContent.textContent =
+                data.message;
+
+
+            messageDate.textContent =
+                `WRITTEN ${formatDate(
+                    new Date(
+                        data.created_at
+                    )
+                )}`;
+
+        }
 
 
         /* =========================
