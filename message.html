@@ -9,34 +9,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
-    --bg:#151210;
-    --bg-soft:#1b1714;
+    --bg:#0d0b18;
+    --bg2:#121024;
 
-    --paper:#e8ddd0;
-    --paper-dark:#d8c8b8;
+    --card:#151326;
+    --card2:#1a1730;
 
-    --ink:#302823;
-    --ink-soft:#62564d;
+    --white:#eeeaf4;
+    --text:#d2cdd9;
+    --muted:#938da0;
 
-    --cream:#eee5db;
-    --muted:#aaa097;
+    --lavender:#aa94d6;
+    --lavender-light:#c1afe7;
+    --purple:#76639f;
 
-    --rose:#ad7779;
-    --rose-soft:#c59694;
+    --line:rgba(190,170,225,.14);
+    --soft-line:rgba(190,170,225,.08);
 
-    --brown:#9b806d;
-
-    --line:rgba(48,40,35,.15);
-    --white-line:rgba(238,229,219,.10);
-
-    --sans:"Inter",sans-serif;
     --serif:"Playfair Display",serif;
+    --sans:"Inter",sans-serif;
     --mono:"DM Mono",monospace;
+    --hand:"Caveat",cursive;
 }
 
 
@@ -47,46 +45,89 @@
 }
 
 
+html{
+    scroll-behavior:smooth;
+}
+
+
 body{
     min-height:100vh;
 
+    color:var(--white);
+
+    font-family:var(--sans);
+
     background:
         radial-gradient(
-            circle at 50% 0%,
-            rgba(173,119,121,.12),
+            circle at 50% 8%,
+            rgba(113,88,165,.20),
             transparent 34%
         ),
         radial-gradient(
-            circle at 90% 80%,
-            rgba(155,128,109,.07),
+            circle at 85% 65%,
+            rgba(95,71,144,.10),
             transparent 30%
         ),
-        var(--bg);
-
-    color:var(--cream);
-
-    font-family:var(--sans);
+        linear-gradient(
+            180deg,
+            #0b0914 0%,
+            #0d0b18 50%,
+            #0a0912 100%
+        );
 
     overflow-x:hidden;
 }
 
 
-/* subtle paper/noise feeling */
+/* subtle atmosphere */
 
 body::before{
     content:"";
 
     position:fixed;
-    inset:0;
+
+    width:500px;
+    height:500px;
+
+    right:-180px;
+    top:-170px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(167,137,219,.14),
+            transparent 68%
+        );
+
+    filter:blur(20px);
 
     pointer-events:none;
 
-    opacity:.035;
+    z-index:-1;
+}
 
-    background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 
-    z-index:0;
+body::after{
+    content:"";
+
+    position:fixed;
+
+    width:400px;
+    height:400px;
+
+    left:-180px;
+    bottom:-170px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(86,68,135,.10),
+            transparent 70%
+        );
+
+    pointer-events:none;
+
+    z-index:-1;
 }
 
 
@@ -101,7 +142,7 @@ a{
 ========================= */
 
 .topbar{
-    height:74px;
+    height:72px;
 
     padding:0 5vw;
 
@@ -110,64 +151,67 @@ a{
     justify-content:space-between;
 
     border-bottom:
-        1px solid var(--white-line);
-
-    position:relative;
-    z-index:5;
+        1px solid
+        var(--soft-line);
 }
 
 
 .brand{
     display:flex;
     align-items:center;
-    gap:11px;
+    gap:10px;
 }
 
 
 .brand-mark{
-    width:29px;
-    height:29px;
+    width:28px;
+    height:28px;
 
-    border:1px solid
-        rgba(197,150,148,.65);
+    border:
+        1px solid
+        rgba(170,148,214,.55);
 
     border-radius:50%;
 
     display:grid;
     place-items:center;
 
-    color:var(--rose-soft);
+    color:var(--lavender-light);
 
     font-family:var(--serif);
+
     font-style:italic;
+
     font-size:13px;
 }
 
 
 .brand-name{
-    color:var(--cream);
+    color:#d8d1e2;
 
     font-family:var(--mono);
-    font-size:10px;
 
-    letter-spacing:.19em;
+    font-size:9px;
+
+    letter-spacing:.18em;
 }
 
 
 .back-link{
-    color:var(--muted);
+    color:#888293;
 
     font-family:var(--mono);
+
     font-size:8px;
 
-    letter-spacing:.08em;
+    letter-spacing:.07em;
 
     transition:.3s ease;
 }
 
 
 .back-link:hover{
-    color:var(--cream);
+    color:var(--white);
 }
 
 
@@ -176,16 +220,13 @@ a{
 ========================= */
 
 main{
-    width:min(1080px,calc(100% - 30px));
+    width:min(1100px, calc(100% - 30px));
 
     margin:auto;
 
     padding:
-        82px 0
-        100px;
-
-    position:relative;
-    z-index:1;
+        78px 0
+        90px;
 }
 
 
@@ -200,17 +241,18 @@ main{
 
 .eyebrow{
     display:inline-flex;
+
     align-items:center;
+
     gap:12px;
 
-    color:var(--rose-soft);
+    color:#aa94c8;
 
     font-family:var(--mono);
+
     font-size:8px;
 
-    letter-spacing:.16em;
-
-    text-transform:uppercase;
+    letter-spacing:.17em;
 }
 
 
@@ -219,121 +261,111 @@ main{
     content:"";
 
     width:28px;
+
     height:1px;
 
     background:
-        rgba(197,150,148,.45);
+        rgba(170,148,214,.40);
 }
 
 
 .reveal-header h1{
-    max-width:1000px;
+    margin:25px auto 0;
 
-    margin:24px auto 0;
+    max-width:1050px;
 
-    color:var(--cream);
+    color:#eeeaf4;
 
     font-size:
-        clamp(48px,7vw,82px);
+        clamp(50px, 7vw, 84px);
 
-    line-height:1;
+    line-height:.98;
 
     letter-spacing:-.065em;
 
-    font-weight:500;
+    font-weight:400;
 }
 
 
 .reveal-header h1 em{
-    color:var(--rose-soft);
+    color:#ae96d9;
 
     font-family:var(--serif);
 
-    font-weight:500;
+    font-style:italic;
+
+    font-weight:400;
 }
 
 
 .subline{
-    max-width:560px;
+    max-width:570px;
 
     margin:25px auto 0;
 
-    color:#9e958e;
+    color:#8e8898;
 
     font-size:13px;
 
     line-height:1.8;
+
+    font-weight:400;
 }
 
 
 /* =========================
-   LETTER AREA
+   MESSAGE AREA
 ========================= */
 
 .message-wrapper{
-    margin-top:66px;
+    margin-top:65px;
 }
 
 
-/*
-   THE LETTER
-*/
+/* =========================
+   MESSAGE CARD
+========================= */
 
 .message-card{
+
     position:relative;
 
-    max-width:980px;
+    max-width:1000px;
 
     margin:auto;
 
     padding:
-        70px
-        75px
-        48px;
+        58px
+        65px
+        42px;
 
     background:
         linear-gradient(
-            145deg,
-            #eee4d8 0%,
-            #e6d9cc 55%,
-            #ddcdbd 100%
+            135deg,
+            rgba(25,22,43,.96),
+            rgba(17,15,30,.96)
         );
 
-    color:var(--ink);
+    border:
+        1px solid
+        rgba(177,153,221,.18);
 
-    border-radius:3px;
+    border-radius:8px;
 
     box-shadow:
-        0 28px 80px
-        rgba(0,0,0,.28),
+        0 35px 100px
+        rgba(0,0,0,.40),
 
-        0 5px 20px
-        rgba(0,0,0,.15);
+        inset 0 1px 0
+        rgba(255,255,255,.025);
 
     overflow:hidden;
 }
 
 
-/* paper edge */
+/* soft glow inside card */
 
 .message-card::before{
-    content:"";
-
-    position:absolute;
-
-    inset:10px;
-
-    border:
-        1px solid
-        rgba(48,40,35,.09);
-
-    pointer-events:none;
-}
-
-
-/* warm paper glow */
-
-.message-card::after{
     content:"";
 
     position:absolute;
@@ -341,138 +373,184 @@ main{
     width:420px;
     height:420px;
 
-    right:-180px;
-    top:-190px;
-
-    background:
-        rgba(173,119,121,.10);
+    top:-250px;
+    right:-150px;
 
     border-radius:50%;
 
-    filter:blur(45px);
+    background:
+        radial-gradient(
+            circle,
+            rgba(157,128,211,.18),
+            transparent 68%
+        );
+
+    filter:blur(25px);
 
     pointer-events:none;
 }
 
 
+.message-card::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:2px;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(170,148,214,.55),
+            transparent
+        );
+
+    opacity:.7;
+}
+
+
 /* =========================
-   LETTER TOP
+   CARD TOP
 ========================= */
 
 .letter-top{
+
     position:relative;
+
     z-index:2;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
-    margin-bottom:42px;
+    margin-bottom:35px;
 }
 
 
 .message-label{
-    color:#9b6668;
+
+    color:#a995c9;
 
     font-family:var(--mono);
 
     font-size:8px;
 
-    letter-spacing:.16em;
+    letter-spacing:.17em;
 
-    text-transform:uppercase;
-
-    font-weight:500;
+    font-weight:400;
 }
 
 
 .letter-symbol{
-    width:34px;
-    height:34px;
+
+    width:36px;
+    height:36px;
+
+    display:grid;
+
+    place-items:center;
 
     border:
         1px solid
-        rgba(48,40,35,.13);
+        rgba(170,148,214,.25);
 
     border-radius:50%;
 
-    display:grid;
-    place-items:center;
-
-    color:#9b6668;
+    color:#a995d1;
 
     font-family:var(--serif);
 
-    font-size:16px;
-
     font-style:italic;
+
+    font-size:16px;
 }
 
 
 /* =========================
-   TITLE
+   MESSAGE TITLE
 ========================= */
 
 .message-title{
+
     position:relative;
+
     z-index:2;
 
     max-width:760px;
 
-    color:var(--ink);
+    color:#eeeaf2;
 
     font-family:var(--serif);
 
     font-size:
-        clamp(38px,5vw,58px);
+        clamp(38px, 4.5vw, 54px);
 
-    line-height:1.12;
-
-    font-weight:500;
+    line-height:1.15;
 
     letter-spacing:-.035em;
+
+    font-weight:400;
 }
 
 
 /* =========================
-   LITTLE INTRO
+   EMOTIONAL INTRO
 ========================= */
 
 .letter-intro{
+
     position:relative;
+
     z-index:2;
 
-    margin-top:24px;
+    margin-top:20px;
 
-    color:#71655c;
+    color:#a49cab;
 
     font-family:var(--serif);
 
     font-size:16px;
 
+    line-height:1.8;
+
     font-style:italic;
 
-    line-height:1.8;
+    font-weight:400;
 }
 
 
 /* =========================
-   MESSAGE
+   MESSAGE TEXT
 ========================= */
 
 .message-content{
+
     position:relative;
+
     z-index:2;
 
-    max-width:720px;
+    max-width:760px;
 
-    margin-top:38px;
+    margin-top:32px;
 
-    color:#413832;
+    color:#c9c3cf;
+
+    font-family:var(--sans);
 
     font-size:16px;
 
     line-height:2;
+
+    font-weight:400;
+
+    letter-spacing:.005em;
 
     white-space:pre-wrap;
 }
@@ -483,35 +561,40 @@ main{
 ========================= */
 
 .signature{
+
     position:relative;
+
     z-index:2;
 
-    margin-top:45px;
+    margin-top:38px;
 
-    color:#7b6a5d;
+    color:#aa96c5;
 
-    font-family:var(--serif);
+    font-family:var(--hand);
 
-    font-size:22px;
+    font-size:25px;
 
-    font-style:italic;
+    font-weight:400;
 }
 
 
 /* =========================
-   LETTER FOOTER
+   FOOTER
 ========================= */
 
 .message-footer{
+
     position:relative;
+
     z-index:2;
 
-    margin-top:42px;
+    margin-top:36px;
 
-    padding-top:20px;
+    padding-top:18px;
 
     border-top:
-        1px solid var(--line);
+        1px solid
+        var(--line);
 
     display:flex;
 
@@ -522,42 +605,49 @@ main{
 
 
 .written{
-    color:#8d8075;
+
+    color:#706a78;
 
     font-family:var(--mono);
 
     font-size:7px;
 
-    letter-spacing:.09em;
+    letter-spacing:.08em;
+
+    font-weight:400;
 }
 
 
 .opened-mark{
+
     display:flex;
+
     align-items:center;
+
     gap:8px;
 
-    color:#8d716f;
+    color:#9184a3;
 
     font-family:var(--mono);
 
     font-size:7px;
 
-    letter-spacing:.09em;
+    letter-spacing:.08em;
 }
 
 
 .opened-dot{
+
     width:6px;
     height:6px;
 
     border-radius:50%;
 
-    background:var(--rose);
+    background:#ad94d0;
 
     box-shadow:
-        0 0 10px
-        rgba(173,119,121,.45);
+        0 0 12px
+        rgba(173,148,208,.55);
 }
 
 
@@ -566,7 +656,8 @@ main{
 ========================= */
 
 .bottom-area{
-    max-width:980px;
+
+    max-width:1000px;
 
     margin:22px auto 0;
 
@@ -579,17 +670,19 @@ main{
 
 
 .memory-note{
-    color:#756c66;
+
+    color:#686270;
 
     font-family:var(--mono);
 
     font-size:7px;
 
-    letter-spacing:.09em;
+    letter-spacing:.08em;
 }
 
 
 .dashboard-button{
+
     min-height:42px;
 
     padding:0 18px;
@@ -597,102 +690,108 @@ main{
     display:inline-flex;
 
     align-items:center;
+
     justify-content:center;
 
     border:
         1px solid
-        rgba(238,229,219,.12);
+        rgba(177,153,221,.14);
 
-    color:#9e958e;
+    color:#898293;
 
     font-family:var(--mono);
 
     font-size:8px;
 
-    letter-spacing:.07em;
+    letter-spacing:.06em;
 
     transition:.3s ease;
 }
 
 
 .dashboard-button:hover{
-    color:var(--cream);
+
+    color:#dcd5e6;
 
     border-color:
-        rgba(197,150,148,.35);
+        rgba(177,153,221,.35);
 
     background:
-        rgba(173,119,121,.08);
+        rgba(150,120,205,.06);
 }
 
 
 /* =========================
-   LOCKED
+   LOCKED MESSAGE
 ========================= */
 
 .locked{
+
     text-align:center;
 
-    padding-top:20px;
+    padding-top:25px;
 }
 
 
 .lock-icon{
-    width:76px;
-    height:76px;
+
+    width:70px;
+    height:70px;
 
     margin:auto;
 
     display:grid;
+
     place-items:center;
 
     border:
         1px solid
-        rgba(197,150,148,.35);
+        rgba(170,148,214,.30);
 
     border-radius:50%;
 
-    color:var(--rose-soft);
+    color:#aa94d0;
 
     font-family:var(--serif);
 
-    font-size:25px;
-
-    font-style:italic;
+    font-size:24px;
 }
 
 
 .locked h1{
-    margin-top:30px;
 
-    color:var(--cream);
+    margin-top:28px;
+
+    color:#eeeaf4;
+
+    font-family:var(--serif);
 
     font-size:
-        clamp(48px,7vw,78px);
+        clamp(45px, 6vw, 70px);
 
-    line-height:1;
+    font-weight:400;
 
-    letter-spacing:-.06em;
-
-    font-weight:500;
+    letter-spacing:-.05em;
 }
 
 
 .locked h1 em{
-    color:var(--rose-soft);
 
-    font-family:var(--serif);
+    color:#a995d0;
 
-    font-weight:500;
+    font-style:italic;
+
+    font-weight:400;
 }
 
 
 .locked-copy{
-    max-width:470px;
 
-    margin:24px auto 0;
+    max-width:460px;
 
-    color:var(--muted);
+    margin:22px auto 0;
+
+    color:#898391;
 
     font-size:13px;
 
@@ -701,9 +800,10 @@ main{
 
 
 .countdown{
+
     max-width:650px;
 
-    margin:48px auto 0;
+    margin:45px auto 0;
 
     display:grid;
 
@@ -711,38 +811,49 @@ main{
         repeat(4,1fr);
 
     border:
-        1px solid var(--white-line);
+        1px solid
+        var(--soft-line);
+
+    background:
+        rgba(18,16,31,.35);
 }
 
 
 .time-box{
-    padding:27px 10px;
+
+    padding:25px 10px;
 
     border-right:
-        1px solid var(--white-line);
+        1px solid
+        var(--soft-line);
 }
 
 
 .time-box:last-child{
+
     border-right:none;
 }
 
 
 .number{
-    color:var(--cream);
+
+    color:#e4deea;
 
     font-family:var(--mono);
 
-    font-size:30px;
+    font-size:28px;
+
+    font-weight:400;
 }
 
 
 .unit{
+
     display:block;
 
     margin-top:8px;
 
-    color:#746c66;
+    color:#686270;
 
     font-family:var(--mono);
 
@@ -753,9 +864,10 @@ main{
 
 
 .reveal-date{
-    margin-top:20px;
 
-    color:#746c66;
+    margin-top:18px;
+
+    color:#686270;
 
     font-family:var(--mono);
 
@@ -770,6 +882,7 @@ main{
 ========================= */
 
 .error-state{
+
     display:none;
 
     text-align:center;
@@ -779,20 +892,22 @@ main{
 
 
 .error-state h1{
-    color:var(--cream);
+
+    color:#eeeaf4;
 
     font-family:var(--serif);
 
     font-size:48px;
 
-    font-weight:500;
+    font-weight:400;
 }
 
 
 .error-state p{
+
     margin-top:15px;
 
-    color:var(--muted);
+    color:#85808c;
 
     font-size:13px;
 }
@@ -805,75 +920,87 @@ main{
 @media(max-width:700px){
 
     .topbar{
+
         height:68px;
-        padding:0 18px;
+
+        padding:
+            0 18px;
     }
 
 
     main{
-        width:calc(100% - 24px);
+
+        width:
+            calc(100% - 24px);
 
         padding:
-            58px 0
+            55px 0
             70px;
     }
 
 
     .reveal-header h1{
-        font-size:46px;
+
+        font-size:45px;
     }
 
 
     .subline{
+
         font-size:12px;
-        padding:0 10px;
+
+        padding:
+            0 12px;
     }
 
 
     .message-wrapper{
+
         margin-top:45px;
     }
 
 
     .message-card{
+
         padding:
-            45px
-            28px
+            42px
+            25px
             30px;
     }
 
 
-    .letter-top{
-        margin-bottom:34px;
-    }
-
-
     .message-title{
-        font-size:36px;
+
+        font-size:35px;
     }
 
 
     .letter-intro{
+
         font-size:14px;
     }
 
 
     .message-content{
+
         font-size:14px;
+
         line-height:1.9;
     }
 
 
     .message-footer{
+
         align-items:flex-start;
 
         flex-direction:column;
 
-        gap:15px;
+        gap:14px;
     }
 
 
     .bottom-area{
+
         align-items:stretch;
 
         flex-direction:column;
@@ -883,30 +1010,36 @@ main{
 
 
     .memory-note{
+
         text-align:center;
     }
 
 
     .dashboard-button{
+
         width:100%;
     }
 
 
     .countdown{
+
         grid-template-columns:
             repeat(2,1fr);
     }
 
 
     .time-box:nth-child(2){
+
         border-right:none;
     }
 
 
     .time-box:nth-child(1),
     .time-box:nth-child(2){
+
         border-bottom:
-            1px solid var(--white-line);
+            1px solid
+            var(--soft-line);
     }
 
 }
@@ -915,37 +1048,42 @@ main{
 @media(max-width:420px){
 
     .reveal-header h1{
-        font-size:40px;
+
+        font-size:39px;
     }
 
 
     .eyebrow{
+
         font-size:7px;
     }
 
 
     .eyebrow::before,
     .eyebrow::after{
+
         width:16px;
     }
 
 
     .message-card{
+
         padding:
-            38px
-            22px
+            35px
+            20px
             27px;
     }
 
 
     .message-title{
-        font-size:31px;
+
+        font-size:30px;
     }
 
 
-    .letter-symbol{
-        width:30px;
-        height:30px;
+    .message-content{
+
+        font-size:14px;
     }
 
 }
@@ -959,9 +1097,14 @@ main{
 
 <header class="topbar">
 
-    <a href="dashboard.html" class="brand">
+    <a
+        href="dashboard.html"
+        class="brand"
+    >
 
-        <span class="brand-mark">A</span>
+        <span class="brand-mark">
+            A
+        </span>
 
         <span class="brand-name">
             AFTERME
@@ -970,7 +1113,10 @@ main{
     </a>
 
 
-    <a href="dashboard.html" class="back-link">
+    <a
+        href="dashboard.html"
+        class="back-link"
+    >
         ← YOUR MESSAGES
     </a>
 
@@ -982,7 +1128,7 @@ main{
 
 
 <!-- =========================
-     REVEALED MESSAGE
+     REVEALED
 ========================= -->
 
 <section
@@ -1036,13 +1182,14 @@ main{
                 class="message-title"
                 id="messageTitle"
             >
-                Your message
+                For the future me
             </h2>
 
 
 
             <div class="letter-intro">
-                You wanted your future self to remember this.
+                If you are reading this,
+                you made it this far.
             </div>
 
 
@@ -1055,7 +1202,7 @@ main{
 
 
             <div class="signature">
-                — From the you who started.
+                — from the you who started
             </div>
 
 
@@ -1074,7 +1221,7 @@ main{
 
                     <span class="opened-dot"></span>
 
-                    OPENED
+                    MESSAGE OPENED
 
                 </div>
 
@@ -1124,7 +1271,7 @@ main{
 
     <span
         class="eyebrow"
-        style="margin-top:32px;"
+        style="margin-top:30px;"
     >
         MESSAGE SEALED
     </span>
@@ -1263,41 +1410,74 @@ main{
 
 <script>
 
-const client = window.aftermeSupabase;
+const client =
+    window.aftermeSupabase;
 
 
 const lockedView =
-    document.getElementById("lockedView");
+    document.getElementById(
+        "lockedView"
+    );
+
 
 const revealedView =
-    document.getElementById("revealedView");
+    document.getElementById(
+        "revealedView"
+    );
+
 
 const errorView =
-    document.getElementById("errorView");
+    document.getElementById(
+        "errorView"
+    );
+
 
 const messageTitle =
-    document.getElementById("messageTitle");
+    document.getElementById(
+        "messageTitle"
+    );
+
 
 const messageContent =
-    document.getElementById("messageContent");
+    document.getElementById(
+        "messageContent"
+    );
+
 
 const messageDate =
-    document.getElementById("messageDate");
+    document.getElementById(
+        "messageDate"
+    );
+
 
 const daysElement =
-    document.getElementById("days");
+    document.getElementById(
+        "days"
+    );
+
 
 const hoursElement =
-    document.getElementById("hours");
+    document.getElementById(
+        "hours"
+    );
+
 
 const minutesElement =
-    document.getElementById("minutes");
+    document.getElementById(
+        "minutes"
+    );
+
 
 const secondsElement =
-    document.getElementById("seconds");
+    document.getElementById(
+        "seconds"
+    );
+
 
 const revealDateElement =
-    document.getElementById("revealDate");
+    document.getElementById(
+        "revealDate"
+    );
 
 
 let targetDate = null;
@@ -1325,10 +1505,13 @@ function formatDate(date){
         undefined,
         {
             day:"2-digit",
+
             month:"long",
+
             year:"numeric",
 
             hour:"2-digit",
+
             minute:"2-digit",
 
             hour12:true
@@ -1356,12 +1539,14 @@ function showError(){
 
 function updateCountdown(){
 
-    if(!targetDate) return;
+    if(!targetDate)
+        return;
 
 
     const difference =
         targetDate.getTime()
-        - Date.now();
+        -
+        Date.now();
 
 
     if(difference <= 0){
@@ -1408,16 +1593,31 @@ function updateCountdown(){
 
 
     daysElement.textContent =
-        String(days).padStart(2,"0");
+        String(days).padStart(
+            2,
+            "0"
+        );
+
 
     hoursElement.textContent =
-        String(hours).padStart(2,"0");
+        String(hours).padStart(
+            2,
+            "0"
+        );
+
 
     minutesElement.textContent =
-        String(minutes).padStart(2,"0");
+        String(minutes).padStart(
+            2,
+            "0"
+        );
+
 
     secondsElement.textContent =
-        String(seconds).padStart(2,"0");
+        String(seconds).padStart(
+            2,
+            "0"
+        );
 
 }
 
@@ -1433,8 +1633,10 @@ function showRevealedMessage(data){
     lockedView.style.display =
         "none";
 
+
     errorView.style.display =
         "none";
+
 
     revealedView.style.display =
         "block";
@@ -1442,7 +1644,7 @@ function showRevealedMessage(data){
 
     messageTitle.textContent =
         data.title ||
-        "Your message";
+        "For the future me";
 
 
     messageContent.textContent =
