@@ -9,27 +9,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
     --bg:#0d0b18;
-    --bg2:#121024;
+    --bg-soft:#121021;
 
-    --card:#151326;
-    --card2:#1a1730;
+    --paper:#171429;
+    --paper-deep:#12101f;
 
     --white:#eeeaf4;
-    --text:#d2cdd9;
-    --muted:#938da0;
+    --text:#c9c2d1;
+    --muted:#898293;
 
-    --lavender:#aa94d6;
-    --lavender-light:#c1afe7;
-    --purple:#76639f;
+    --lavender:#ad97d5;
+    --lavender-soft:#c1afe5;
+    --lavender-dark:#78669c;
 
     --line:rgba(190,170,225,.14);
-    --soft-line:rgba(190,170,225,.08);
+    --line-soft:rgba(190,170,225,.08);
 
     --serif:"Playfair Display",serif;
     --sans:"Inter",sans-serif;
@@ -59,27 +59,27 @@ body{
 
     background:
         radial-gradient(
-            circle at 50% 8%,
-            rgba(113,88,165,.20),
+            circle at 50% 0%,
+            rgba(119,94,170,.18),
             transparent 34%
         ),
         radial-gradient(
-            circle at 85% 65%,
-            rgba(95,71,144,.10),
+            circle at 90% 70%,
+            rgba(100,76,150,.08),
             transparent 30%
         ),
         linear-gradient(
             180deg,
-            #0b0914 0%,
-            #0d0b18 50%,
-            #0a0912 100%
+            #0a0912 0%,
+            #0d0b18 52%,
+            #090811 100%
         );
 
     overflow-x:hidden;
 }
 
 
-/* subtle atmosphere */
+/* atmosphere */
 
 body::before{
     content:"";
@@ -89,13 +89,15 @@ body::before{
     width:500px;
     height:500px;
 
+    top:-250px;
     right:-180px;
-    top:-170px;
+
+    border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(167,137,219,.14),
+            rgba(170,145,215,.13),
             transparent 68%
         );
 
@@ -112,16 +114,18 @@ body::after{
 
     position:fixed;
 
-    width:400px;
-    height:400px;
+    width:420px;
+    height:420px;
 
+    bottom:-220px;
     left:-180px;
-    bottom:-170px;
+
+    border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(86,68,135,.10),
+            rgba(91,70,137,.11),
             transparent 70%
         );
 
@@ -131,14 +135,8 @@ body::after{
 }
 
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-
 /* =========================
-   TOP BAR
+   TOPBAR
 ========================= */
 
 .topbar{
@@ -152,14 +150,17 @@ a{
 
     border-bottom:
         1px solid
-        var(--soft-line);
+        var(--line-soft);
 }
 
 
 .brand{
     display:flex;
     align-items:center;
+
     gap:10px;
+
+    text-decoration:none;
 }
 
 
@@ -169,14 +170,14 @@ a{
 
     border:
         1px solid
-        rgba(170,148,214,.55);
+        rgba(173,151,213,.45);
 
     border-radius:50%;
 
     display:grid;
     place-items:center;
 
-    color:var(--lavender-light);
+    color:var(--lavender-soft);
 
     font-family:var(--serif);
 
@@ -187,7 +188,7 @@ a{
 
 
 .brand-name{
-    color:#d8d1e2;
+    color:#d5cfdf;
 
     font-family:var(--mono);
 
@@ -198,7 +199,7 @@ a{
 
 
 .back-link{
-    color:#888293;
+    color:#7f798b;
 
     font-family:var(--mono);
 
@@ -211,7 +212,7 @@ a{
 
 
 .back-link:hover{
-    color:var(--white);
+    color:#eeeaf4;
 }
 
 
@@ -246,7 +247,7 @@ main{
 
     gap:12px;
 
-    color:#aa94c8;
+    color:#a994c8;
 
     font-family:var(--mono);
 
@@ -261,11 +262,10 @@ main{
     content:"";
 
     width:28px;
-
     height:1px;
 
     background:
-        rgba(170,148,214,.40);
+        rgba(173,151,213,.38);
 }
 
 
@@ -288,7 +288,7 @@ main{
 
 
 .reveal-header h1 em{
-    color:#ae96d9;
+    color:#ad96d6;
 
     font-family:var(--serif);
 
@@ -299,11 +299,11 @@ main{
 
 
 .subline{
-    max-width:570px;
+    max-width:580px;
 
     margin:25px auto 0;
 
-    color:#8e8898;
+    color:#888291;
 
     font-size:13px;
 
@@ -323,7 +323,7 @@ main{
 
 
 /* =========================
-   MESSAGE CARD
+   NEW LETTER STYLE CARD
 ========================= */
 
 .message-card{
@@ -335,70 +335,72 @@ main{
     margin:auto;
 
     padding:
-        58px
-        65px
-        42px;
+        0;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(25,22,43,.96),
-            rgba(17,15,30,.96)
+            145deg,
+            rgba(29,25,48,.96),
+            rgba(15,14,27,.98)
         );
 
     border:
         1px solid
-        rgba(177,153,221,.18);
+        rgba(177,153,221,.15);
 
-    border-radius:8px;
+    border-radius:14px;
 
     box-shadow:
         0 35px 100px
-        rgba(0,0,0,.40),
+        rgba(0,0,0,.46),
 
-        inset 0 1px 0
-        rgba(255,255,255,.025);
+        0 0 80px
+        rgba(111,87,160,.06);
 
     overflow:hidden;
 }
 
 
-/* soft glow inside card */
+/* decorative top glow */
 
 .message-card::before{
+
     content:"";
 
     position:absolute;
 
-    width:420px;
-    height:420px;
+    top:-180px;
+    right:-100px;
 
-    top:-250px;
-    right:-150px;
+    width:430px;
+    height:430px;
 
     border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(157,128,211,.18),
+            rgba(166,140,215,.16),
             transparent 68%
         );
 
-    filter:blur(25px);
+    filter:blur(15px);
 
     pointer-events:none;
 }
 
 
+/* left vertical light */
+
 .message-card::after{
+
     content:"";
 
     position:absolute;
 
     left:0;
-    top:0;
-    bottom:0;
+    top:55px;
+    bottom:55px;
 
     width:2px;
 
@@ -406,23 +408,36 @@ main{
         linear-gradient(
             180deg,
             transparent,
-            rgba(170,148,214,.55),
+            rgba(173,151,213,.52),
             transparent
         );
 
-    opacity:.7;
+    opacity:.75;
 }
 
 
 /* =========================
-   CARD TOP
+   LETTER INNER
 ========================= */
 
-.letter-top{
+.letter-inner{
 
     position:relative;
 
     z-index:2;
+
+    padding:
+        58px
+        65px
+        44px;
+}
+
+
+/* =========================
+   LETTER HEADER
+========================= */
+
+.letter-header{
 
     display:flex;
 
@@ -430,13 +445,17 @@ main{
 
     justify-content:space-between;
 
-    margin-bottom:35px;
+    padding-bottom:25px;
+
+    border-bottom:
+        1px solid
+        rgba(190,170,225,.08);
 }
 
 
 .message-label{
 
-    color:#a995c9;
+    color:#a794c6;
 
     font-family:var(--mono);
 
@@ -450,75 +469,68 @@ main{
 
 .letter-symbol{
 
-    width:36px;
-    height:36px;
-
-    display:grid;
-
-    place-items:center;
+    width:40px;
+    height:40px;
 
     border:
         1px solid
-        rgba(170,148,214,.25);
+        rgba(173,151,213,.24);
 
     border-radius:50%;
 
-    color:#a995d1;
+    display:grid;
+    place-items:center;
+
+    color:#b09ad2;
 
     font-family:var(--serif);
 
-    font-style:italic;
-
     font-size:16px;
+
+    font-style:italic;
 }
 
 
 /* =========================
-   MESSAGE TITLE
+   TITLE
 ========================= */
 
 .message-title{
 
-    position:relative;
+    margin-top:42px;
 
-    z-index:2;
-
-    max-width:760px;
-
-    color:#eeeaf2;
+    color:#eeeaf3;
 
     font-family:var(--serif);
 
     font-size:
-        clamp(38px, 4.5vw, 54px);
+        clamp(39px, 4.5vw, 55px);
 
     line-height:1.15;
 
-    letter-spacing:-.035em;
+    letter-spacing:-.04em;
 
     font-weight:400;
 }
 
 
 /* =========================
-   EMOTIONAL INTRO
+   EMOTIONAL OPENING
 ========================= */
 
-.letter-intro{
+.message-intro{
 
-    position:relative;
+    max-width:720px;
 
-    z-index:2;
+    margin-top:24px;
 
-    margin-top:20px;
-
-    color:#a49cab;
+    color:#aaa2b2;
 
     font-family:var(--serif);
 
-    font-size:16px;
+    font-size:17px;
 
-    line-height:1.8;
+    line-height:1.9;
 
     font-style:italic;
 
@@ -527,74 +539,95 @@ main{
 
 
 /* =========================
-   MESSAGE TEXT
+   ACTUAL MESSAGE
 ========================= */
 
 .message-content{
 
-    position:relative;
-
-    z-index:2;
-
     max-width:760px;
 
-    margin-top:32px;
+    margin-top:30px;
 
-    color:#c9c3cf;
+    color:#cbc5d0;
 
     font-family:var(--sans);
 
     font-size:16px;
 
-    line-height:2;
-
-    font-weight:400;
+    line-height:2.05;
 
     letter-spacing:.005em;
+
+    font-weight:400;
 
     white-space:pre-wrap;
 }
 
 
+/* First line subtle emphasis */
+
+.message-content::first-line{
+    color:#ddd7e2;
+}
+
+
 /* =========================
-   SIGNATURE
+   EMOTIONAL SIGNATURE
 ========================= */
+
+.signature-area{
+
+    margin-top:42px;
+
+    padding-top:25px;
+
+    border-top:
+        1px solid
+        rgba(190,170,225,.08);
+}
+
+
+.signature-note{
+
+    color:#706979;
+
+    font-family:var(--mono);
+
+    font-size:7px;
+
+    letter-spacing:.09em;
+}
+
 
 .signature{
 
-    position:relative;
+    margin-top:8px;
 
-    z-index:2;
-
-    margin-top:38px;
-
-    color:#aa96c5;
+    color:#a996c4;
 
     font-family:var(--hand);
 
-    font-size:25px;
+    font-size:27px;
+
+    line-height:1;
 
     font-weight:400;
 }
 
 
 /* =========================
-   FOOTER
+   CARD FOOTER
 ========================= */
 
 .message-footer{
 
-    position:relative;
-
-    z-index:2;
-
-    margin-top:36px;
+    margin-top:28px;
 
     padding-top:18px;
 
     border-top:
         1px solid
-        var(--line);
+        rgba(190,170,225,.08);
 
     display:flex;
 
@@ -606,15 +639,13 @@ main{
 
 .written{
 
-    color:#706a78;
+    color:#706978;
 
     font-family:var(--mono);
 
     font-size:7px;
 
     letter-spacing:.08em;
-
-    font-weight:400;
 }
 
 
@@ -626,7 +657,7 @@ main{
 
     gap:8px;
 
-    color:#9184a3;
+    color:#9588a6;
 
     font-family:var(--mono);
 
@@ -643,11 +674,11 @@ main{
 
     border-radius:50%;
 
-    background:#ad94d0;
+    background:#ac94d0;
 
     box-shadow:
         0 0 12px
-        rgba(173,148,208,.55);
+        rgba(172,148,208,.55);
 }
 
 
@@ -671,7 +702,7 @@ main{
 
 .memory-note{
 
-    color:#686270;
+    color:#65606d;
 
     font-family:var(--mono);
 
@@ -705,16 +736,18 @@ main{
 
     letter-spacing:.06em;
 
+    text-decoration:none;
+
     transition:.3s ease;
 }
 
 
 .dashboard-button:hover{
 
-    color:#dcd5e6;
+    color:#ded8e6;
 
     border-color:
-        rgba(177,153,221,.35);
+        rgba(177,153,221,.34);
 
     background:
         rgba(150,120,205,.06);
@@ -722,7 +755,7 @@ main{
 
 
 /* =========================
-   LOCKED MESSAGE
+   LOCKED
 ========================= */
 
 .locked{
@@ -741,7 +774,6 @@ main{
     margin:auto;
 
     display:grid;
-
     place-items:center;
 
     border:
@@ -812,7 +844,7 @@ main{
 
     border:
         1px solid
-        var(--soft-line);
+        var(--line-soft);
 
     background:
         rgba(18,16,31,.35);
@@ -825,12 +857,11 @@ main{
 
     border-right:
         1px solid
-        var(--soft-line);
+        var(--line-soft);
 }
 
 
 .time-box:last-child{
-
     border-right:none;
 }
 
@@ -923,8 +954,7 @@ main{
 
         height:68px;
 
-        padding:
-            0 18px;
+        padding:0 18px;
     }
 
 
@@ -949,8 +979,7 @@ main{
 
         font-size:12px;
 
-        padding:
-            0 12px;
+        padding:0 12px;
     }
 
 
@@ -960,24 +989,34 @@ main{
     }
 
 
-    .message-card{
+    .letter-inner{
 
         padding:
-            42px
-            25px
+            40px 25px
             30px;
+    }
+
+
+    .message-card::after{
+
+        top:35px;
+        bottom:35px;
     }
 
 
     .message-title{
 
+        margin-top:34px;
+
         font-size:35px;
     }
 
 
-    .letter-intro{
+    .message-intro{
 
-        font-size:14px;
+        font-size:15px;
+
+        line-height:1.8;
     }
 
 
@@ -985,7 +1024,7 @@ main{
 
         font-size:14px;
 
-        line-height:1.9;
+        line-height:1.95;
     }
 
 
@@ -1039,7 +1078,7 @@ main{
 
         border-bottom:
             1px solid
-            var(--soft-line);
+            var(--line-soft);
     }
 
 }
@@ -1066,12 +1105,11 @@ main{
     }
 
 
-    .message-card{
+    .letter-inner{
 
         padding:
-            35px
-            20px
-            27px;
+            34px 20px
+            26px;
     }
 
 
@@ -1084,6 +1122,8 @@ main{
     .message-content{
 
         font-size:14px;
+
+        line-height:1.9;
     }
 
 }
@@ -1128,7 +1168,7 @@ main{
 
 
 <!-- =========================
-     REVEALED
+     REVEALED MESSAGE
 ========================= -->
 
 <section
@@ -1162,71 +1202,83 @@ main{
 
         <article class="message-card">
 
+            <div class="letter-inner">
 
-            <div class="letter-top">
 
-                <div class="message-label">
-                    A MESSAGE FROM YOUR PAST SELF
+                <div class="letter-header">
+
+                    <div class="message-label">
+                        A LETTER FROM YOUR PAST SELF
+                    </div>
+
+
+                    <div class="letter-symbol">
+                        A
+                    </div>
+
                 </div>
 
 
-                <div class="letter-symbol">
-                    A
+
+                <h2
+                    class="message-title"
+                    id="messageTitle"
+                >
+                    For the future me
+                </h2>
+
+
+
+                <div class="message-intro">
+                    You wrote this before you knew
+                    exactly what life would become.
                 </div>
 
-            </div>
 
-
-
-            <h2
-                class="message-title"
-                id="messageTitle"
-            >
-                For the future me
-            </h2>
-
-
-
-            <div class="letter-intro">
-                If you are reading this,
-                you made it this far.
-            </div>
-
-
-
-            <div
-                class="message-content"
-                id="messageContent"
-            ></div>
-
-
-
-            <div class="signature">
-                — from the you who started
-            </div>
-
-
-
-            <div class="message-footer">
 
                 <div
-                    class="written"
-                    id="messageDate"
-                >
-                    WRITTEN —
+                    class="message-content"
+                    id="messageContent"
+                ></div>
+
+
+
+                <div class="signature-area">
+
+                    <div class="signature-note">
+                        LEFT HERE BY AN EARLIER VERSION OF YOU
+                    </div>
+
+
+                    <div class="signature">
+                        — from you, back then
+                    </div>
+
                 </div>
 
 
-                <div class="opened-mark">
 
-                    <span class="opened-dot"></span>
+                <div class="message-footer">
 
-                    MESSAGE OPENED
+                    <div
+                        class="written"
+                        id="messageDate"
+                    >
+                        WRITTEN —
+                    </div>
+
+
+                    <div class="opened-mark">
+
+                        <span class="opened-dot"></span>
+
+                        MESSAGE OPENED
+
+                    </div>
 
                 </div>
 
             </div>
-
 
         </article>
 
