@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard — AFTERME</title>
+
+    <meta
+        name="description"
+        content="Your private space for messages to your future self."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        :root {
+
+            --bg: #050506;
+
+            --surface: #0b0c0f;
+
+            --surface-2: #101115;
+
+            --surface-3: #15171b;
+
+            --text: #ebe9e2;
+
+            --muted: #85858a;
+
+            --dim: #55565b;
+
+            --accent: #55d9ff;
+
+            --accent-soft: rgba(85, 217, 255, .08);
+
+            --line: rgba(235, 233, 226, .09);
+
+            --line-strong: rgba(235, 233, 226, .16);
+
+            --serif: "Playfair Display", serif;
+
+            --sans: "Inter", sans-serif;
+
+            --mono: "DM Mono", monospace;
+
+        }
+
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html,
+        body {
+
+            min-height: 100%;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+
+                radial-gradient(
+                    circle at 75% 5%,
+                    rgba(85, 217, 255, .055),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 10% 80%,
+                    rgba(85, 217, 255, .025),
+                    transparent 30%
+                ),
+
+                var(--bg);
+
+            color: var(--text);
+
+            font-family: var(--sans);
+
+            overflow-x: hidden;
+
+        }
+
+
+        button {
+
+            font: inherit;
+
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+        }
+
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .grid {
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: .10;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 80px 80px;
+
+            mask-image:
+
+                radial-gradient(
+                    circle at center,
+                    black,
+                    transparent 75%
+                );
+
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .topbar {
+
+            height: 82px;
+
+            padding: 0 5vw;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--line);
+
+            position: relative;
+
+            z-index: 5;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+        }
+
+
+        .brand-mark {
+
+            width: 30px;
+
+            height: 30px;
+
+            position: relative;
+
+            display: grid;
+
+            place-items: center;
+
+            border: 1px solid var(--accent);
+
+            border-radius: 50%;
+
+            font-family: var(--mono);
+
+            font-size: 10px;
+
+        }
+
+
+        .brand-orbit {
+
+            position: absolute;
+
+            width: 43px;
+
+            height: 15px;
+
+            border: 1px solid rgba(85, 217, 255, .45);
+
+            border-radius: 50%;
+
+            transform: rotate(-28deg);
+
+        }
+
+
+        .brand-dot {
+
+            position: absolute;
+
+            width: 4px;
+
+            height: 4px;
+
+            right: -6px;
+
+            top: -5px;
+
+            background: var(--accent);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 12px var(--accent);
+
+        }
+
+
+        .brand-name {
+
+            font-family: var(--mono);
+
+            font-size: 12px;
+
+            letter-spacing: .2em;
+
+        }
+
+
+        .nav-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+
+        .user-email {
+
+            color: var(--dim);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .06em;
+
+        }
+
+
+        .logout {
+
+            padding: 9px 13px;
+
+            border: 1px solid var(--line);
+
+            background: transparent;
+
+            color: var(--muted);
+
+            cursor: pointer;
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .1em;
+
+            transition: .25s ease;
+
+        }
+
+
+        .logout:hover {
+
+            color: var(--text);
+
+            border-color: var(--line-strong);
+
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+
+            width: min(1180px, 90%);
+
+            margin: 0 auto;
+
+            padding: 80px 0 100px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .eyebrow {
+
+            color: var(--accent);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .18em;
+
+        }
+
+
+        .hero {
+
+            max-width: 760px;
+
+        }
+
+
+        .hero h1 {
+
+            margin-top: 24px;
+
+            font-size: clamp(55px, 8vw, 100px);
+
+            line-height: .92;
+
+            letter-spacing: -.065em;
+
+            font-weight: 500;
+
+        }
+
+
+        .hero h1 em {
+
+            font-family: var(--serif);
+
+            font-weight: 500;
+
+            color: var(--accent);
+
+        }
+
+
+        .hero p {
+
+            max-width: 500px;
+
+            margin-top: 30px;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.9;
+
+        }
+
+
+        /* =========================
+           ACTION
+        ========================= */
+
+        .create-area {
+
+            margin-top: 60px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            padding: 25px;
+
+            border: 1px solid var(--line);
+
+            background: rgba(11, 12, 15, .72);
+
+        }
+
+
+        .create-copy {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+        }
+
+
+        .create-symbol {
+
+            width: 42px;
+
+            height: 42px;
+
+            display: grid;
+
+            place-items: center;
+
+            border: 1px solid rgba(85, 217, 255, .3);
+
+            color: var(--accent);
+
+            font-family: var(--mono);
+
+            font-size: 18px;
+
+        }
+
+
+        .create-copy strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+        }
+
+
+        .create-copy span {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: var(--dim);
+
+            font-size: 10px;
+
+        }
+
+
+        .create-btn {
+
+            min-width: 210px;
+
+            height: 50px;
+
+            padding: 0 20px;
+
+            border: 1px solid rgba(85, 217, 255, .35);
+
+            background: var(--accent-soft);
+
+            color: var(--text);
+
+            cursor: pointer;
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .13em;
+
+            transition: .25s ease;
+
+        }
+
+
+        .create-btn:hover {
+
+            background: var(--accent);
+
+            color: #050506;
+
+            border-color: var(--accent);
+
+        }
+
+
+        /* =========================
+           MESSAGES
+        ========================= */
+
+        .messages-section {
+
+            margin-top: 85px;
+
+        }
+
+
+        .section-head {
+
+            display: flex;
+
+            align-items: end;
+
+            justify-content: space-between;
+
+            padding-bottom: 18px;
+
+            border-bottom: 1px solid var(--line);
+
+        }
+
+
+        .section-head h2 {
+
+            font-size: 20px;
+
+            font-weight: 500;
+
+            letter-spacing: -.02em;
+
+        }
+
+
+        .section-head span {
+
+            color: var(--dim);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .1em;
+
+        }
+
+
+        .messages-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .message-card {
+
+            min-height: 220px;
+
+            padding: 22px;
+
+            border: 1px solid var(--line);
+
+            background: var(--surface);
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            transition:
+                border-color .25s ease,
+                transform .25s ease;
+
+        }
+
+
+        .message-card:hover {
+
+            border-color: var(--line-strong);
+
+            transform: translateY(-3px);
+
+        }
+
+
+        .card-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+        }
+
+
+        .status {
+
+            padding: 5px 8px;
+
+            border: 1px solid rgba(85, 217, 255, .18);
+
+            color: var(--accent);
+
+            font-family: var(--mono);
+
+            font-size: 7px;
+
+            letter-spacing: .1em;
+
+        }
+
+
+        .message-card h3 {
+
+            margin-top: 25px;
+
+            font-size: 16px;
+
+            font-weight: 500;
+
+            line-height: 1.4;
+
+        }
+
+
+        .message-card p {
+
+            margin-top: 10px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .card-bottom {
+
+            margin-top: 30px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid var(--line);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            color: var(--dim);
+
+            font-family: var(--mono);
+
+            font-size: 7px;
+
+            letter-spacing: .05em;
+
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty-state {
+
+            grid-column: 1 / -1;
+
+            padding: 65px 25px;
+
+            text-align: center;
+
+            border: 1px dashed var(--line);
+
+            background: rgba(11, 12, 15, .4);
+
+        }
+
+
+        .empty-state .symbol {
+
+            color: var(--accent);
+
+            font-family: var(--serif);
+
+            font-size: 34px;
+
+        }
+
+
+        .empty-state h3 {
+
+            margin-top: 12px;
+
+            font-size: 17px;
+
+            font-weight: 500;
+
+        }
+
+
+        .empty-state p {
+
+            max-width: 390px;
+
+            margin: 10px auto 0;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+
+            color: var(--dim);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .1em;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .messages-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+            .create-area {
+
+                align-items: stretch;
+
+                flex-direction: column;
+
+            }
+
+            .create-btn {
+
+                width: 100%;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+
+                height: 75px;
+
+                padding: 0 20px;
+
+            }
+
+            .user-email {
+
+                display: none;
+
+            }
+
+            main {
+
+                width: calc(100% - 40px);
+
+                padding-top: 55px;
+
+            }
+
+            .hero h1 {
+
+                font-size: 54px;
+
+            }
+
+            .messages-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .create-area {
+
+                padding: 20px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="grid"></div>
+
+
+    <!-- NAV -->
+
+    <header class="topbar">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <span class="brand-mark">
+
+                A
+
+                <span class="brand-orbit"></span>
+
+                <span class="brand-dot"></span>
+
+            </span>
+
+            <span class="brand-name">
+                AFTERME
+            </span>
+
+        </a>
+
+
+        <div class="nav-right">
+
+            <span
+                class="user-email"
+                id="userEmail"
+            >
+                loading...
+            </span>
+
+            <button
+                class="logout"
+                id="logoutButton"
+            >
+                LOG OUT
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <span class="eyebrow">
+                YOUR PRIVATE FUTURE
+            </span>
+
+
+            <h1>
+                Leave something
+                <em>behind.</em>
+            </h1>
+
+
+            <p>
+                Write something for the person you
+                haven't become yet. Seal it. Then let
+                time do the rest.
+            </p>
+
+        </section>
+
+
+        <!-- CREATE -->
+
+        <section class="create-area">
+
+            <div class="create-copy">
+
+                <div class="create-symbol">
+                    +
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Create a message
+                    </strong>
+
+                    <span>
+                        Write to your future self.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="create-btn"
+                id="createMessageButton"
+            >
+                CREATE YOUR FIRST MESSAGE →
+            </button>
+
+        </section>
+
+
+        <!-- MESSAGES -->
+
+        <section class="messages-section">
+
+            <div class="section-head">
+
+                <h2>
+                    Your messages
+                </h2>
+
+                <span id="messageCount">
+                    0 SEALED
+                </span>
+
+            </div>
+
+
+            <div
+                class="messages-grid"
+                id="messagesGrid"
+            >
+
+                <div class="empty-state">
+
+                    <div class="symbol">
+                        ∞
+                    </div>
+
+                    <h3>
+                        Nothing sealed yet.
+                    </h3>
+
+                    <p>
+                        Your first message is waiting
+                        to be written. What would you
+                        want your future self to remember?
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/config.js"></script>
+
+
+    <script>
+
+    const client = window.aftermeSupabase;
+
+    const userEmail =
+        document.getElementById("userEmail");
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+    const createMessageButton =
+        document.getElementById("createMessageButton");
+
+    const messagesGrid =
+        document.getElementById("messagesGrid");
+
+    const messageCount =
+        document.getElementById("messageCount");
+
+
+    /* =========================
+       CHECK USER
+    ========================= */
+
+    async function checkUser() {
+
+        if (!client) {
+
+            console.error(
+                "AFTERME Supabase client not found."
+            );
+
+            showDatabaseError();
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } = await client.auth.getUser();
+
+
+        if (
+            error ||
+            !data ||
+            !data.user
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        userEmail.textContent =
+            data.user.email;
+
+
+        await loadMessages(
+            data.user.id
+        );
+
+    }
+
+
+    /* =========================
+       LOAD USER MESSAGES
+    ========================= */
+
+    async function loadMessages(userId) {
+
+        messagesGrid.innerHTML = `
+            <div class="empty-state">
+                <div class="symbol">∞</div>
+
+                <h3>
+                    Loading your messages...
+                </h3>
+
+                <p>
+                    Give us a moment.
+                </p>
+            </div>
+        `;
+
+
+        const {
+            data,
+            error
+        } = await client
+            .from("messages")
+            .select(
+                "id, title, reveal_at, status, created_at"
+            )
+            .eq(
+                "user_id",
+                userId
+            )
+            .order(
+                "reveal_at",
+                {
+                    ascending: true
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "Could not load messages:",
+                error
+            );
+
+            showDatabaseError();
+
+            return;
+
+        }
+
+
+        if (
+            !data ||
+            data.length === 0
+        ) {
+
+            showEmptyState();
+
+            return;
+
+        }
+
+
+        messageCount.textContent =
+            `${data.length} MESSAGE${data.length === 1 ? "" : "S"}`;
+
+
+        messagesGrid.innerHTML = "";
+
+
+        data.forEach(
+            (message) => {
+
+                createMessageCard(
+                    message
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================
+       CREATE MESSAGE CARD
+    ========================= */
+
+    function createMessageCard(message) {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "message-card";
+
+
+        const revealDate =
+            new Date(
+                message.reveal_at
+            );
+
+
+        const now =
+            new Date();
+
+
+        const isRevealed =
+            now.getTime() >=
+            revealDate.getTime();
+
+
+        const status =
+            isRevealed
+                ? "REVEALED"
+                : "SEALED";
+
+
+        card.style.cursor =
+            "pointer";
+
+
+        card.setAttribute(
+            "role",
+            "button"
+        );
+
+
+        card.setAttribute(
+            "tabindex",
+            "0"
+        );
+
+
+        card.innerHTML = `
+
+            <div>
+
+                <div class="card-top">
+
+                    <span class="status">
+                        ${status}
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    ${escapeHtml(
+                        message.title
+                    )}
+                </h3>
+
+
+                <p>
+                    ${
+                        isRevealed
+                            ? "Your message is ready to be opened."
+                            : "Your words are sealed until the moment you chose."
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="card-bottom">
+
+                <span>
+                    ${
+                        isRevealed
+                            ? "OPEN MESSAGE"
+                            : "REVEALS"
+                    }
+                </span>
+
+
+                <span>
+                    ${formatDate(
+                        revealDate
+                    )}
+                </span>
+
+            </div>
+
+        `;
+
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                openMessage(
+                    message.id
+                );
+
+            }
+        );
+
+
+        card.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    openMessage(
+                        message.id
+                    );
+
+                }
+
+            }
+        );
+
+
+        messagesGrid.appendChild(
+            card
+        );
+
+    }
+
+
+    /* =========================
+       OPEN MESSAGE
+    ========================= */
+
+    function openMessage(messageId) {
+
+        if (!messageId) {
+            return;
+        }
+
+
+        window.location.href =
+            `message.html?id=${encodeURIComponent(
+                messageId
+            )}`;
+
+    }
+
+
+    /* =========================
+       EMPTY STATE
+    ========================= */
+
+    function showEmptyState() {
+
+        messageCount.textContent =
+            "0 SEALED";
+
+
+        messagesGrid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="symbol">
+                    ∞
+                </div>
+
+
+                <h3>
+                    Nothing sealed yet.
+                </h3>
+
+
+                <p>
+                    Your first message is waiting
+                    to be written. What would you
+                    want your future self to remember?
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       DATABASE ERROR
+    ========================= */
+
+    function showDatabaseError() {
+
+        messageCount.textContent =
+            "ERROR";
+
+
+        messagesGrid.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="symbol">
+                    !
+                </div>
+
+
+                <h3>
+                    Something went wrong.
+                </h3>
+
+
+                <p>
+                    AFTERME couldn't load your
+                    messages right now. Please
+                    refresh the page and try again.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       CREATE MESSAGE
+    ========================= */
+
+    createMessageButton.addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                "create-message.html";
+
+        }
+    );
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    logoutButton.addEventListener(
+        "click",
+        async () => {
+
+            logoutButton.disabled =
+                true;
+
+
+            logoutButton.textContent =
+                "LOGGING OUT...";
+
+
+            const {
+                error
+            } =
+                await client.auth.signOut();
+
+
+            if (error) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+
+                logoutButton.disabled =
+                    false;
+
+
+                logoutButton.textContent =
+                    "LOG OUT";
+
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+
+    /* =========================
+       ESCAPE HTML
+    ========================= */
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replaceAll(
+                "&",
+                "&amp;"
+            )
+            .replaceAll(
+                "<",
+                "&lt;"
+            )
+            .replaceAll(
+                ">",
+                "&gt;"
+            )
+            .replaceAll(
+                '"',
+                "&quot;"
+            )
+            .replaceAll(
+                "'",
+                "&#039;"
+            );
+
+    }
+
+
+    /* =========================
+       DATE FORMAT
+    ========================= */
+
+    function formatDate(date) {
+
+        return date.toLocaleDateString(
+            undefined,
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        ).toUpperCase();
+
+    }
+
+
+    /* =========================
+       START
+    ========================= */
+
+    checkUser();
+
+</script>
+</body>
+
+</html>

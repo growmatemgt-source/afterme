@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Message — AFTERME</title>
+
+    <meta
+        name="description"
+        content="Write a message for your future self."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        :root {
+
+            --bg: #050506;
+
+            --surface: #0b0c0f;
+
+            --surface-2: #101115;
+
+            --text: #ebe9e2;
+
+            --muted: #85858a;
+
+            --dim: #55565b;
+
+            --accent: #55d9ff;
+
+            --accent-soft: rgba(85, 217, 255, .08);
+
+            --line: rgba(235, 233, 226, .09);
+
+            --line-strong: rgba(235, 233, 226, .17);
+
+            --danger: #df8585;
+
+            --serif: "Playfair Display", serif;
+
+            --sans: "Inter", sans-serif;
+
+            --mono: "DM Mono", monospace;
+
+        }
+
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html,
+        body {
+
+            min-height: 100%;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+
+                radial-gradient(
+                    circle at 70% 20%,
+                    rgba(85, 217, 255, .045),
+                    transparent 30%
+                ),
+
+                var(--bg);
+
+            color: var(--text);
+
+            font-family: var(--sans);
+
+            overflow-x: hidden;
+
+        }
+
+
+        button,
+        input,
+        textarea {
+
+            font: inherit;
+
+        }
+
+
+        button {
+
+            cursor: pointer;
+
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+        }
+
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .grid {
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: .10;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 80px 80px;
+
+            mask-image:
+
+                radial-gradient(
+                    circle at center,
+                    black,
+                    transparent 75%
+                );
+
+        }
+
+
+        /* =========================
+           NAV
+        ========================= */
+
+        .topbar {
+
+            height: 82px;
+
+            padding: 0 5vw;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--line);
+
+            position: relative;
+
+            z-index: 5;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+        }
+
+
+        .brand-mark {
+
+            width: 30px;
+
+            height: 30px;
+
+            position: relative;
+
+            display: grid;
+
+            place-items: center;
+
+            border: 1px solid var(--accent);
+
+            border-radius: 50%;
+
+            font-family: var(--mono);
+
+            font-size: 10px;
+
+        }
+
+
+        .brand-orbit {
+
+            position: absolute;
+
+            width: 43px;
+
+            height: 15px;
+
+            border: 1px solid rgba(85, 217, 255, .45);
+
+            border-radius: 50%;
+
+            transform: rotate(-28deg);
+
+        }
+
+
+        .brand-dot {
+
+            position: absolute;
+
+            width: 4px;
+
+            height: 4px;
+
+            right: -6px;
+
+            top: -5px;
+
+            background: var(--accent);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 12px var(--accent);
+
+        }
+
+
+        .brand-name {
+
+            font-family: var(--mono);
+
+            font-size: 12px;
+
+            letter-spacing: .2em;
+
+        }
+
+
+        .back {
+
+            color: var(--muted);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .1em;
+
+        }
+
+
+        .back:hover {
+
+            color: var(--accent);
+
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+
+            width: min(900px, 90%);
+
+            margin: 0 auto;
+
+            padding: 75px 0 110px;
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .eyebrow {
+
+            color: var(--accent);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .18em;
+
+        }
+
+
+        .intro {
+
+            max-width: 650px;
+
+        }
+
+
+        .intro h1 {
+
+            margin-top: 22px;
+
+            font-size: clamp(50px, 7vw, 82px);
+
+            line-height: .95;
+
+            letter-spacing: -.06em;
+
+            font-weight: 500;
+
+        }
+
+
+        .intro h1 em {
+
+            color: var(--accent);
+
+            font-family: var(--serif);
+
+            font-weight: 500;
+
+        }
+
+
+        .intro p {
+
+            max-width: 470px;
+
+            margin-top: 25px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.9;
+
+        }
+
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .message-form {
+
+            margin-top: 60px;
+
+            padding: 35px;
+
+            border: 1px solid var(--line);
+
+            background: rgba(11, 12, 15, .82);
+
+        }
+
+
+        .field {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .field-label {
+
+            display: block;
+
+            margin-bottom: 10px;
+
+            color: var(--muted);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .14em;
+
+        }
+
+
+        .field-hint {
+
+            margin-top: 7px;
+
+            color: var(--dim);
+
+            font-size: 9px;
+
+        }
+
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            border: 1px solid var(--line);
+
+            outline: none;
+
+            background: var(--surface-2);
+
+            color: var(--text);
+
+            transition:
+                border-color .25s ease,
+                background .25s ease;
+
+        }
+
+
+        input:focus,
+        textarea:focus {
+
+            border-color:
+                rgba(85, 217, 255, .42);
+
+            background: #121318;
+
+        }
+
+
+        input::placeholder,
+        textarea::placeholder {
+
+            color: #4f5055;
+
+        }
+
+
+        #messageTitle {
+
+            height: 55px;
+
+            padding: 0 16px;
+
+            font-size: 14px;
+
+        }
+
+
+        #messageContent {
+
+            min-height: 300px;
+
+            padding: 17px;
+
+            resize: vertical;
+
+            font-size: 13px;
+
+            line-height: 1.9;
+
+        }
+
+
+        /* =========================
+           DATE / TIME
+        ========================= */
+
+        .date-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        .date-box {
+
+            position: relative;
+
+        }
+
+
+        .date-box input {
+
+            height: 55px;
+
+            padding: 0 15px;
+
+            color-scheme: dark;
+
+        }
+
+
+        /* =========================
+           SEAL INFO
+        ========================= */
+
+        .seal-info {
+
+            margin-top: 40px;
+
+            padding: 20px;
+
+            border: 1px solid
+                rgba(85, 217, 255, .13);
+
+            background:
+                rgba(85, 217, 255, .025);
+
+            display: flex;
+
+            gap: 15px;
+
+            align-items: flex-start;
+
+        }
+
+
+        .seal-symbol {
+
+            color: var(--accent);
+
+            font-family: var(--serif);
+
+            font-size: 23px;
+
+            line-height: 1;
+
+        }
+
+
+        .seal-info strong {
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+        }
+
+
+        .seal-info p {
+
+            margin-top: 6px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .form-message {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 13px 15px;
+
+            border: 1px solid var(--line);
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .form-message.show {
+
+            display: block;
+
+        }
+
+
+        .form-message.error {
+
+            border-color:
+                rgba(223,133,133,.3);
+
+            color: var(--danger);
+
+        }
+
+
+        .form-message.success {
+
+            border-color:
+                rgba(85,217,255,.25);
+
+            color: var(--text);
+
+        }
+
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+
+            margin-top: 30px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+
+        .cancel {
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--dim);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .1em;
+
+        }
+
+
+        .cancel:hover {
+
+            color: var(--text);
+
+        }
+
+
+        .seal-button {
+
+            min-width: 235px;
+
+            height: 55px;
+
+            padding: 0 25px;
+
+            border: 1px solid
+                rgba(85,217,255,.4);
+
+            background: var(--accent-soft);
+
+            color: var(--text);
+
+            font-family: var(--mono);
+
+            font-size: 8px;
+
+            letter-spacing: .14em;
+
+            transition: .25s ease;
+
+        }
+
+
+        .seal-button:hover {
+
+            background: var(--accent);
+
+            color: #050506;
+
+            border-color: var(--accent);
+
+        }
+
+
+        .seal-button:disabled {
+
+            opacity: .55;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* =========================
+           FOOTNOTE
+        ========================= */
+
+        .footnote {
+
+            margin-top: 35px;
+
+            color: var(--dim);
+
+            font-family: var(--mono);
+
+            font-size: 7px;
+
+            line-height: 1.7;
+
+            text-align: center;
+
+            letter-spacing: .06em;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .topbar {
+
+                height: 75px;
+
+                padding: 0 20px;
+
+            }
+
+            main {
+
+                width: calc(100% - 40px);
+
+                padding-top: 55px;
+
+            }
+
+            .intro h1 {
+
+                font-size: 52px;
+
+            }
+
+            .message-form {
+
+                padding: 23px 18px;
+
+            }
+
+            .date-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .actions {
+
+                align-items: stretch;
+
+                flex-direction: column-reverse;
+
+            }
+
+            .seal-button {
+
+                width: 100%;
+
+            }
+
+            .cancel {
+
+                padding: 10px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="grid"></div>
+
+
+    <!-- NAV -->
+
+    <header class="topbar">
+
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
+
+            <span class="brand-mark">
+
+                A
+
+                <span class="brand-orbit"></span>
+
+                <span class="brand-dot"></span>
+
+            </span>
+
+            <span class="brand-name">
+                AFTERME
+            </span>
+
+        </a>
+
+
+        <a
+            href="dashboard.html"
+            class="back"
+        >
+            ← BACK TO SPACE
+        </a>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <section class="intro">
+
+            <span class="eyebrow">
+                CREATE / PRIVATE MESSAGE
+            </span>
+
+
+            <h1>
+                Write to the
+                <em>future.</em>
+            </h1>
+
+
+            <p>
+                Don't write what sounds good today.
+                Write what the person you become
+                will need to hear.
+            </p>
+
+        </section>
+
+
+        <!-- FORM -->
+
+        <form
+            class="message-form"
+            id="messageForm"
+        >
+
+
+            <!-- TITLE -->
+
+            <div class="field">
+
+                <label
+                    class="field-label"
+                    for="messageTitle"
+                >
+                    MESSAGE TITLE
+                </label>
+
+
+                <input
+                    type="text"
+                    id="messageTitle"
+                    maxlength="100"
+                    placeholder="For the person I become..."
+                    required
+                >
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="field">
+
+                <label
+                    class="field-label"
+                    for="messageContent"
+                >
+                    YOUR MESSAGE
+                </label>
+
+
+                <textarea
+                    id="messageContent"
+                    maxlength="10000"
+                    placeholder="Say what you really want your future self to remember..."
+                    required
+                ></textarea>
+
+
+                <div class="field-hint">
+                    Your words stay private until the moment you choose.
+                </div>
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="field">
+
+                <label class="field-label">
+                    WHEN SHOULD IT OPEN?
+                </label>
+
+
+                <div class="date-grid">
+
+                    <div class="date-box">
+
+                        <input
+                            type="date"
+                            id="revealDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="date-box">
+
+                        <input
+                            type="time"
+                            id="revealTime"
+                            value="09:00"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="field-hint">
+                    Choose a future date and time.
+                </div>
+
+            </div>
+
+
+            <!-- INFO -->
+
+            <div class="seal-info">
+
+                <div class="seal-symbol">
+                    ∞
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Once sealed, the moment is set.
+                    </strong>
+
+
+                    <p>
+                        Your message will be saved privately
+                        to your AFTERME account. The chosen
+                        reveal time determines when it becomes
+                        eligible to be opened.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ERROR / SUCCESS -->
+
+            <div
+                class="form-message"
+                id="formMessage"
+            ></div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                <button
+                    type="button"
+                    class="cancel"
+                    id="cancelButton"
+                >
+                    ← CANCEL
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="seal-button"
+                    id="sealButton"
+                >
+                    SEAL THIS MESSAGE →
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+        <div class="footnote">
+
+            AFTERME / WHAT YOU WRITE TODAY
+            BECOMES A MESSAGE FOR TOMORROW.
+
+        </div>
+
+    </main>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/config.js"></script>
+
+
+    <script>
+
+        const client =
+            window.aftermeSupabase;
+
+
+        const messageForm =
+            document.getElementById(
+                "messageForm"
+            );
+
+
+        const titleInput =
+            document.getElementById(
+                "messageTitle"
+            );
+
+
+        const contentInput =
+            document.getElementById(
+                "messageContent"
+            );
+
+
+        const revealDate =
+            document.getElementById(
+                "revealDate"
+            );
+
+
+        const revealTime =
+            document.getElementById(
+                "revealTime"
+            );
+
+
+        const formMessage =
+            document.getElementById(
+                "formMessage"
+            );
+
+
+        const sealButton =
+            document.getElementById(
+                "sealButton"
+            );
+
+
+        const cancelButton =
+            document.getElementById(
+                "cancelButton"
+            );
+
+
+        /* =========================
+           MINIMUM DATE
+        ========================= */
+
+        function setMinimumDate() {
+
+            const now =
+                new Date();
+
+
+            const year =
+                now.getFullYear();
+
+
+            const month =
+                String(
+                    now.getMonth() + 1
+                ).padStart(2, "0");
+
+
+            const day =
+                String(
+                    now.getDate()
+                ).padStart(2, "0");
+
+
+            revealDate.min =
+                `${year}-${month}-${day}`;
+
+        }
+
+
+        setMinimumDate();
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        function showMessage(
+            text,
+            type = "error"
+        ) {
+
+            formMessage.textContent =
+                text;
+
+            formMessage.className =
+                `form-message show ${type}`;
+
+        }
+
+
+        function clearMessage() {
+
+            formMessage.textContent =
+                "";
+
+            formMessage.className =
+                "form-message";
+
+        }
+
+
+        /* =========================
+           CHECK USER
+        ========================= */
+
+        async function checkUser() {
+
+            if (!client) {
+
+                showMessage(
+                    "AFTERME is not connected to Supabase yet."
+                );
+
+                return null;
+
+            }
+
+
+            const {
+                data,
+                error
+            } =
+                await client.auth.getUser();
+
+
+            if (
+                error ||
+                !data ||
+                !data.user
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+                return null;
+
+            }
+
+
+            return data.user;
+
+        }
+
+
+        /* =========================
+           VALIDATE DATE
+        ========================= */
+
+        function getRevealDateTime() {
+
+            if (
+                !revealDate.value ||
+                !revealTime.value
+            ) {
+
+                throw new Error(
+                    "Please choose a reveal date and time."
+                );
+
+            }
+
+
+            const selected =
+                new Date(
+                    `${revealDate.value}T${revealTime.value}`
+                );
+
+
+            if (
+                Number.isNaN(
+                    selected.getTime()
+                )
+            ) {
+
+                throw new Error(
+                    "Please choose a valid date and time."
+                );
+
+            }
+
+
+            if (
+                selected.getTime() <=
+                Date.now()
+            ) {
+
+                throw new Error(
+                    "Your message must be scheduled for a future time."
+                );
+
+            }
+
+
+            return selected;
+
+        }
+
+
+        /* =========================
+           SAVE MESSAGE
+        ========================= */
+
+        messageForm.addEventListener(
+            "submit",
+            async (event) => {
+
+                event.preventDefault();
+
+                clearMessage();
+
+
+                if (!client) {
+
+                    showMessage(
+                        "Supabase connection is missing."
+                    );
+
+                    return;
+
+                }
+
+
+                const user =
+                    await checkUser();
+
+
+                if (!user) {
+                    return;
+                }
+
+
+                const title =
+                    titleInput.value.trim();
+
+
+                const content =
+                    contentInput.value.trim();
+
+
+                if (!title) {
+
+                    showMessage(
+                        "Give your message a title."
+                    );
+
+                    titleInput.focus();
+
+                    return;
+
+                }
+
+
+                if (!content) {
+
+                    showMessage(
+                        "Write something for your future self."
+                    );
+
+                    contentInput.focus();
+
+                    return;
+
+                }
+
+
+                if (content.length < 10) {
+
+                    showMessage(
+                        "Your message should be a little more meaningful. Write at least 10 characters."
+                    );
+
+                    contentInput.focus();
+
+                    return;
+
+                }
+
+
+                let revealAt;
+
+
+                try {
+
+                    revealAt =
+                        getRevealDateTime();
+
+                } catch (error) {
+
+                    showMessage(
+                        error.message
+                    );
+
+                    return;
+
+                }
+
+
+                sealButton.disabled =
+                    true;
+
+
+                sealButton.textContent =
+                    "SEALING...";
+
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await client
+                            .from("messages")
+                            .insert({
+
+                                user_id:
+                                    user.id,
+
+                                title:
+                                    title,
+
+                                message:
+                                    content,
+
+                                reveal_at:
+                                    revealAt.toISOString(),
+
+                                status:
+                                    "sealed"
+
+                            })
+                            .select()
+                            .single();
+
+
+                    if (error) {
+                        throw error;
+                    }
+
+
+                    if (!data) {
+
+                        throw new Error(
+                            "Message could not be saved."
+                        );
+
+                    }
+
+
+                    showMessage(
+                        "Your message has been sealed. Taking you back to your space...",
+                        "success"
+                    );
+
+
+                    messageForm.reset();
+
+
+                    setTimeout(
+                        () => {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        },
+                        1200
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Message save error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
+                        "Something went wrong while sealing your message."
+                    );
+
+
+                } finally {
+
+                    sealButton.disabled =
+                        false;
+
+                    sealButton.textContent =
+                        "SEAL THIS MESSAGE →";
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           CANCEL
+        ========================= */
+
+        cancelButton.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }
+        );
+
+
+        /* =========================
+           START
+        ========================= */
+
+        checkUser();
+
+    </script>
+
+</body>
+
+</html>
