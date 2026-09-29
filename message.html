@@ -4,34 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Your Moment — AFTERME</title>
+    <title>AFTERME — Your Message</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
 
         :root {
             --bg: #050506;
-            --surface: #0b0c0e;
-            --surface-soft: #0e1012;
+            --surface: #0a0b0d;
+            --surface-2: #0d0f11;
 
-            --text: #f0eee7;
-            --muted: #8d8d91;
-            --dim: #5b5c60;
+            --white: #f1efe9;
+            --text: #c2c1c0;
+            --muted: #85868a;
+            --dim: #5e6064;
 
-            --accent: #55d9ff;
-            --accent-soft: rgba(85,217,255,.07);
+            --cyan: #55d9ff;
+            --cyan-soft: rgba(85, 217, 255, 0.08);
 
-            --line: rgba(240,238,231,.09);
-            --line-soft: rgba(240,238,231,.055);
+            --border: rgba(241, 239, 233, 0.10);
+            --border-soft: rgba(241, 239, 233, 0.065);
 
             --sans: "Inter", sans-serif;
             --serif: "Playfair Display", serif;
             --mono: "DM Mono", monospace;
         }
+
 
         * {
             margin: 0;
@@ -39,91 +44,88 @@
             box-sizing: border-box;
         }
 
+
         html {
             scroll-behavior: smooth;
         }
 
+
         body {
             min-height: 100vh;
+
             background:
                 radial-gradient(
-                    circle at 50% -10%,
-                    rgba(85,217,255,.075),
+                    circle at 50% -15%,
+                    rgba(85, 217, 255, 0.065),
                     transparent 34%
-                ),
-                radial-gradient(
-                    circle at 90% 85%,
-                    rgba(85,217,255,.025),
-                    transparent 30%
                 ),
                 var(--bg);
 
-            color: var(--text);
+            color: var(--white);
             font-family: var(--sans);
+
             overflow-x: hidden;
         }
+
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(255,255,255,.012) 50%,
+                    transparent 100%
+                );
+
+            opacity: .7;
+        }
+
 
         a {
             color: inherit;
             text-decoration: none;
         }
 
-        /* subtle background */
 
-        .background-grid {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: .055;
-
-            background-image:
-                linear-gradient(
-                    rgba(255,255,255,.035) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,.035) 1px,
-                    transparent 1px
-                );
-
-            background-size: 90px 90px;
-
-            mask-image:
-                radial-gradient(
-                    ellipse at center,
-                    black 0%,
-                    transparent 76%
-                );
-        }
-
-        /* NAV */
+        /* =========================
+           TOP NAV
+        ========================= */
 
         .topbar {
-            height: 82px;
+            height: 78px;
+
             padding: 0 5vw;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            border-bottom: 1px solid var(--line);
+            border-bottom: 1px solid var(--border-soft);
 
             position: relative;
-            z-index: 10;
+            z-index: 20;
         }
+
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 13px;
+            gap: 12px;
         }
+
 
         .brand-mark {
             width: 30px;
             height: 30px;
 
-            border: 1px solid var(--accent);
+            border: 1px solid var(--cyan);
             border-radius: 50%;
 
             display: grid;
@@ -131,21 +133,26 @@
 
             position: relative;
 
+            color: var(--cyan);
+
             font-family: var(--mono);
             font-size: 10px;
         }
 
+
         .brand-orbit {
             position: absolute;
 
-            width: 43px;
+            width: 42px;
             height: 15px;
 
-            border: 1px solid rgba(85,217,255,.42);
+            border: 1px solid rgba(85,217,255,.35);
+
             border-radius: 50%;
 
             transform: rotate(-28deg);
         }
+
 
         .brand-dot {
             position: absolute;
@@ -157,147 +164,201 @@
             top: -5px;
 
             border-radius: 50%;
-            background: var(--accent);
 
-            box-shadow: 0 0 12px var(--accent);
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 12px rgba(85,217,255,.7);
         }
+
 
         .brand-name {
+            color: var(--white);
+
             font-family: var(--mono);
-            font-size: 12px;
-            letter-spacing: .2em;
+
+            font-size: 11px;
+
+            letter-spacing: .20em;
         }
 
-        .back-link {
-            display: flex;
-            align-items: center;
-            gap: 9px;
 
+        .back-link {
             color: var(--muted);
 
             font-family: var(--mono);
-            font-size: 8px;
-            letter-spacing: .1em;
 
-            transition: color .25s ease;
+            font-size: 8px;
+
+            letter-spacing: .10em;
+
+            transition:
+                color .25s ease;
         }
+
 
         .back-link:hover {
-            color: var(--text);
+            color: var(--white);
         }
 
-        /* MAIN */
+
+        /* =========================
+           MAIN
+        ========================= */
 
         main {
-            width: min(940px, calc(100% - 40px));
+            width: min(1080px, calc(100% - 36px));
+
             margin: 0 auto;
 
-            padding: 90px 0 120px;
+            padding: 88px 0 110px;
 
             position: relative;
             z-index: 2;
         }
 
-        /* REVEALED HEADER */
+
+        /* =========================
+           REVEALED HEADER
+        ========================= */
 
         .reveal-header {
             text-align: center;
-            max-width: 900px;
+
+            max-width: 1050px;
+
             margin: 0 auto;
         }
 
+
         .eyebrow {
             display: inline-flex;
-            align-items: center;
-            gap: 10px;
 
-            color: var(--accent);
+            align-items: center;
+            justify-content: center;
+
+            gap: 11px;
+
+            color: var(--cyan);
 
             font-family: var(--mono);
-            font-size: 8px;
-            letter-spacing: .18em;
+
+            font-size: 9px;
+            font-weight: 500;
+
+            letter-spacing: .17em;
+
+            text-transform: uppercase;
         }
+
 
         .eyebrow::before,
         .eyebrow::after {
             content: "";
-            width: 24px;
+
+            width: 28px;
             height: 1px;
 
-            background: rgba(85,217,255,.35);
+            background: rgba(85,217,255,.40);
         }
 
+
         .reveal-header h1 {
-            margin-top: 25px;
+            margin-top: 24px;
 
-            font-size: clamp(48px, 7.4vw, 88px);
+            color: var(--white);
 
-            line-height: .96;
+            font-size: clamp(
+                48px,
+                7.2vw,
+                88px
+            );
+
+            line-height: .98;
+
             letter-spacing: -.065em;
 
             font-weight: 500;
         }
 
+
         .reveal-header h1 em {
-            color: var(--accent);
+            color: var(--cyan);
 
             font-family: var(--serif);
+
             font-weight: 500;
+
+            letter-spacing: -.045em;
         }
 
+
         .subline {
-            max-width: 460px;
+            max-width: 550px;
+
             margin: 25px auto 0;
 
             color: var(--muted);
 
-            font-size: 12px;
+            font-size: 13px;
+
             line-height: 1.8;
         }
 
-        /* MESSAGE */
+
+        /* =========================
+           MESSAGE AREA
+        ========================= */
 
         .message-wrapper {
-            margin-top: 60px;
+            margin-top: 62px;
         }
+
 
         .message-card {
             position: relative;
 
-            border: 1px solid var(--line);
-
             background:
                 linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.025),
-                    rgba(255,255,255,.008)
+                    135deg,
+                    rgba(255,255,255,.026),
+                    rgba(255,255,255,.008) 55%,
+                    rgba(85,217,255,.018)
                 );
 
-            padding: 58px 65px 42px;
+            border: 1px solid var(--border);
+
+            padding: 58px 64px 40px;
 
             overflow: hidden;
         }
+
+
+        /* subtle cyan glow */
 
         .message-card::before {
             content: "";
 
             position: absolute;
 
-            width: 260px;
-            height: 260px;
+            width: 330px;
+            height: 330px;
 
-            top: -170px;
-            right: -90px;
+            top: -220px;
+            right: -120px;
 
             border-radius: 50%;
 
             background:
                 rgba(85,217,255,.055);
 
-            filter: blur(20px);
+            filter: blur(35px);
 
             pointer-events: none;
         }
+
+
+        /* left accent line */
 
         .message-card::after {
             content: "";
@@ -313,89 +374,139 @@
             background:
                 linear-gradient(
                     to bottom,
-                    transparent,
-                    var(--accent),
-                    transparent
+                    transparent 0%,
+                    rgba(85,217,255,.8) 35%,
+                    rgba(85,217,255,.8) 65%,
+                    transparent 100%
                 );
-
-            opacity: .55;
         }
+
+
+        /* =========================
+           MESSAGE LABEL
+        ========================= */
 
         .message-label {
-            color: var(--dim);
+            color: var(--cyan);
 
             font-family: var(--mono);
-            font-size: 7px;
-            letter-spacing: .17em;
+
+            font-size: 10px;
+
+            font-weight: 500;
+
+            letter-spacing: .15em;
+
+            line-height: 1.5;
 
             text-transform: uppercase;
+
+            opacity: .9;
         }
+
+
+        /* =========================
+           TITLE
+        ========================= */
 
         .message-title {
             margin-top: 17px;
 
+            color: var(--white);
+
             font-family: var(--serif);
 
-            font-size: clamp(28px, 4vw, 42px);
+            font-size: clamp(
+                32px,
+                4vw,
+                46px
+            );
 
-            line-height: 1.15;
+            line-height: 1.16;
 
             font-weight: 500;
-            letter-spacing: -.02em;
+
+            letter-spacing: -.025em;
         }
+
+
+        /* =========================
+           MESSAGE BODY
+        ========================= */
 
         .message-content {
             margin-top: 32px;
 
-            max-width: 720px;
+            max-width: 790px;
 
-            color: #a7a7aa;
+            color: #b9b9bc;
 
-            font-size: 15px;
-            line-height: 2.05;
+            font-size: 16px;
+
+            font-weight: 400;
+
+            line-height: 2;
+
+            letter-spacing: -.005em;
 
             white-space: pre-wrap;
         }
 
+
+        /* =========================
+           FOOTER
+        ========================= */
+
         .message-footer {
-            margin-top: 45px;
+            margin-top: 46px;
 
-            padding-top: 22px;
+            padding-top: 21px;
 
-            border-top: 1px solid var(--line-soft);
+            border-top: 1px solid var(--border-soft);
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
-            gap: 20px;
+            gap: 25px;
         }
 
+
         .written {
-            color: var(--dim);
+            color: #6d6e72;
 
             font-family: var(--mono);
 
-            font-size: 7px;
+            font-size: 8px;
 
-            letter-spacing: .1em;
+            font-weight: 400;
+
+            letter-spacing: .09em;
 
             line-height: 1.8;
         }
 
+
         .opened-mark {
             display: flex;
+
             align-items: center;
+
             gap: 8px;
 
-            color: var(--accent);
+            color: var(--cyan);
 
             font-family: var(--mono);
 
-            font-size: 7px;
+            font-size: 8px;
 
-            letter-spacing: .1em;
+            font-weight: 500;
+
+            letter-spacing: .09em;
         }
+
 
         .opened-dot {
             width: 5px;
@@ -403,173 +514,200 @@
 
             border-radius: 50%;
 
-            background: var(--accent);
+            background: var(--cyan);
 
             box-shadow:
-                0 0 10px rgba(85,217,255,.65);
+                0 0 12px rgba(85,217,255,.7);
         }
 
-        /* BOTTOM */
+
+        /* =========================
+           BOTTOM
+        ========================= */
 
         .bottom-area {
-            margin-top: 34px;
+            margin-top: 25px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             gap: 20px;
         }
 
+
         .memory-note {
             color: var(--dim);
 
             font-family: var(--mono);
-            font-size: 7px;
+
+            font-size: 8px;
 
             letter-spacing: .08em;
         }
 
+
         .dashboard-button {
             display: inline-flex;
+
             align-items: center;
-            gap: 10px;
+            justify-content: center;
 
-            padding: 13px 17px;
+            gap: 9px;
 
-            border: 1px solid var(--line);
+            min-height: 42px;
+
+            padding: 0 17px;
+
+            border: 1px solid var(--border);
 
             color: var(--muted);
 
             font-family: var(--mono);
+
             font-size: 8px;
 
-            letter-spacing: .09em;
+            letter-spacing: .08em;
 
             transition:
-                border-color .25s ease,
                 color .25s ease,
+                border-color .25s ease,
                 background .25s ease;
         }
 
+
         .dashboard-button:hover {
-            border-color: rgba(85,217,255,.35);
+            color: var(--white);
 
-            color: var(--text);
+            border-color:
+                rgba(85,217,255,.35);
 
-            background: var(--accent-soft);
+            background:
+                var(--cyan-soft);
         }
 
-        /* ERROR */
 
-        .error-state {
-            display: none;
-
-            text-align: center;
-
-            padding: 100px 0;
-        }
-
-        .error-state h1 {
-            font-size: 48px;
-            font-weight: 500;
-            letter-spacing: -.04em;
-        }
-
-        .error-state p {
-            margin-top: 16px;
-
-            color: var(--muted);
-
-            font-size: 13px;
-        }
-
-        /* LOCKED */
+        /* =========================
+           LOCKED MESSAGE
+        ========================= */
 
         .locked {
             text-align: center;
+
+            padding-top: 15px;
         }
 
+
         .lock-icon {
-            width: 82px;
-            height: 82px;
+            width: 78px;
+            height: 78px;
 
             margin: 0 auto;
 
             display: grid;
             place-items: center;
 
-            border: 1px solid rgba(85,217,255,.25);
-
-            color: var(--accent);
-
-            font-family: var(--mono);
-            font-size: 22px;
+            border: 1px solid rgba(85,217,255,.22);
 
             border-radius: 50%;
+
+            color: var(--cyan);
+
+            font-family: var(--mono);
+
+            font-size: 20px;
 
             box-shadow:
                 0 0 70px rgba(85,217,255,.045);
         }
 
+
         .locked h1 {
             margin-top: 28px;
 
-            font-size: clamp(46px, 7vw, 78px);
+            color: var(--white);
+
+            font-size: clamp(
+                48px,
+                7vw,
+                80px
+            );
 
             line-height: .98;
 
-            letter-spacing: -.06em;
+            letter-spacing: -.065em;
 
             font-weight: 500;
         }
+
 
         .locked h1 em {
+            color: var(--cyan);
+
             font-family: var(--serif);
-            color: var(--accent);
+
             font-weight: 500;
         }
+
 
         .locked-copy {
             max-width: 480px;
-            margin: 23px auto 0;
+
+            margin: 24px auto 0;
 
             color: var(--muted);
 
             font-size: 13px;
+
             line-height: 1.8;
         }
+
 
         .countdown {
             max-width: 650px;
 
-            margin: 55px auto 0;
+            margin: 52px auto 0;
 
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
 
-            border: 1px solid var(--line);
+            grid-template-columns:
+                repeat(4, 1fr);
 
-            background: rgba(11,12,14,.75);
+            border: 1px solid var(--border);
+
+            background:
+                rgba(10,11,13,.82);
         }
+
 
         .time-box {
             padding: 28px 12px;
 
-            border-right: 1px solid var(--line);
+            border-right: 1px solid var(--border);
         }
+
 
         .time-box:last-child {
             border-right: none;
         }
 
+
         .number {
             display: block;
 
+            color: var(--white);
+
             font-family: var(--mono);
 
-            font-size: clamp(25px, 4vw, 38px);
+            font-size: clamp(
+                25px,
+                4vw,
+                38px
+            );
         }
+
 
         .unit {
             display: block;
@@ -585,6 +723,7 @@
             letter-spacing: .12em;
         }
 
+
         .reveal-date {
             margin-top: 23px;
 
@@ -597,82 +736,228 @@
             letter-spacing: .08em;
         }
 
-        /* RESPONSIVE */
 
-        @media (max-width: 700px) {
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-state {
+            display: none;
+
+            text-align: center;
+
+            padding: 100px 0;
+        }
+
+
+        .error-state h1 {
+            color: var(--white);
+
+            font-size: 48px;
+
+            font-weight: 500;
+
+            letter-spacing: -.04em;
+        }
+
+
+        .error-state p {
+            margin-top: 15px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 760px) {
 
             .topbar {
-                height: 74px;
+                height: 72px;
+
                 padding: 0 20px;
             }
+
 
             .brand-name {
                 font-size: 10px;
             }
 
-            main {
-                width: calc(100% - 30px);
-                padding-top: 65px;
+
+            .back-link {
+                font-size: 7px;
             }
+
+
+            main {
+                width: calc(100% - 28px);
+
+                padding:
+                    62px 0
+                    85px;
+            }
+
 
             .reveal-header h1 {
-                font-size: 52px;
+                font-size: 51px;
+
+                line-height: 1;
             }
+
+
+            .subline {
+                font-size: 12px;
+
+                padding: 0 10px;
+            }
+
+
+            .message-wrapper {
+                margin-top: 48px;
+            }
+
 
             .message-card {
-                padding: 38px 25px 28px;
+                padding:
+                    38px
+                    25px
+                    29px;
             }
 
+
+            .message-label {
+                font-size: 8px;
+
+                letter-spacing: .12em;
+            }
+
+
+            .message-title {
+                font-size: 32px;
+
+                margin-top: 15px;
+            }
+
+
             .message-content {
+                margin-top: 27px;
+
                 font-size: 14px;
+
                 line-height: 1.9;
             }
 
+
             .message-footer {
+                margin-top: 35px;
+
                 align-items: flex-start;
+
                 flex-direction: column;
             }
 
+
             .bottom-area {
+                align-items: stretch;
+
                 flex-direction: column;
-                align-items: flex-start;
             }
+
+
+            .memory-note {
+                text-align: center;
+            }
+
 
             .dashboard-button {
                 width: 100%;
-                justify-content: center;
             }
 
+
             .countdown {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
+
 
             .time-box:nth-child(2) {
                 border-right: none;
             }
 
+
             .time-box:nth-child(1),
             .time-box:nth-child(2) {
-                border-bottom: 1px solid var(--line);
+                border-bottom:
+                    1px solid var(--border);
             }
+
+        }
+
+
+        @media (max-width: 430px) {
+
+            .reveal-header h1 {
+                font-size: 43px;
+            }
+
+
+            .eyebrow {
+                font-size: 7px;
+            }
+
+
+            .eyebrow::before,
+            .eyebrow::after {
+                width: 18px;
+            }
+
+
+            .message-card {
+                padding:
+                    32px
+                    20px
+                    26px;
+            }
+
+
+            .message-title {
+                font-size: 29px;
+            }
+
         }
 
     </style>
 </head>
 
+
 <body>
 
-    <div class="background-grid"></div>
+
+    <!-- =========================
+         TOP BAR
+    ========================= -->
 
     <header class="topbar">
 
-        <a href="dashboard.html" class="brand">
+        <a
+            href="dashboard.html"
+            class="brand"
+        >
 
             <span class="brand-mark">
+
                 A
+
                 <span class="brand-orbit"></span>
+
                 <span class="brand-dot"></span>
+
             </span>
+
 
             <span class="brand-name">
                 AFTERME
@@ -680,7 +965,11 @@
 
         </a>
 
-        <a href="dashboard.html" class="back-link">
+
+        <a
+            href="dashboard.html"
+            class="back-link"
+        >
             ← YOUR MESSAGES
         </a>
 
@@ -689,9 +978,15 @@
 
     <main>
 
-        <!-- REVEALED -->
 
-        <section class="revealed" id="revealedView">
+        <!-- =========================
+             REVEALED MESSAGE
+        ========================= -->
+
+        <section
+            class="revealed"
+            id="revealedView"
+        >
 
             <div class="reveal-header">
 
@@ -699,10 +994,12 @@
                     THE MOMENT HAS ARRIVED
                 </span>
 
+
                 <h1>
                     You left this
                     <em>for yourself.</em>
                 </h1>
+
 
                 <p class="subline">
                     A message from another version of you,
@@ -716,9 +1013,11 @@
 
                 <article class="message-card">
 
+
                     <div class="message-label">
                         A MESSAGE FROM YOUR PAST SELF
                     </div>
+
 
                     <h2
                         class="message-title"
@@ -726,6 +1025,7 @@
                     >
                         Your message
                     </h2>
+
 
                     <div
                         class="message-content"
@@ -741,6 +1041,7 @@
                         >
                             WRITTEN —
                         </div>
+
 
                         <div class="opened-mark">
 
@@ -761,6 +1062,7 @@
                         SOME THINGS ARE WORTH WAITING FOR.
                     </div>
 
+
                     <a
                         href="dashboard.html"
                         class="dashboard-button"
@@ -775,7 +1077,9 @@
         </section>
 
 
-        <!-- LOCKED -->
+        <!-- =========================
+             LOCKED MESSAGE
+        ========================= -->
 
         <section
             class="locked"
@@ -787,52 +1091,108 @@
                 ∞
             </div>
 
-            <span class="eyebrow" style="margin-top:35px;">
+
+            <span
+                class="eyebrow"
+                style="margin-top:35px;"
+            >
                 MESSAGE SEALED
             </span>
+
 
             <h1>
                 Not yet.
                 <em>Wait.</em>
             </h1>
 
+
             <p class="locked-copy">
                 Something from your past is waiting
                 for the right moment.
             </p>
 
+
             <div class="countdown">
 
                 <div class="time-box">
-                    <span class="number" id="days">00</span>
-                    <span class="unit">DAYS</span>
+
+                    <span
+                        class="number"
+                        id="days"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        DAYS
+                    </span>
+
                 </div>
 
-                <div class="time-box">
-                    <span class="number" id="hours">00</span>
-                    <span class="unit">HOURS</span>
-                </div>
 
                 <div class="time-box">
-                    <span class="number" id="minutes">00</span>
-                    <span class="unit">MINUTES</span>
+
+                    <span
+                        class="number"
+                        id="hours"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        HOURS
+                    </span>
+
                 </div>
 
+
                 <div class="time-box">
-                    <span class="number" id="seconds">00</span>
-                    <span class="unit">SECONDS</span>
+
+                    <span
+                        class="number"
+                        id="minutes"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        MINUTES
+                    </span>
+
+                </div>
+
+
+                <div class="time-box">
+
+                    <span
+                        class="number"
+                        id="seconds"
+                    >
+                        00
+                    </span>
+
+                    <span class="unit">
+                        SECONDS
+                    </span>
+
                 </div>
 
             </div>
 
-            <div class="reveal-date" id="revealDate">
+
+            <div
+                class="reveal-date"
+                id="revealDate"
+            >
                 REVEAL DATE — LOADING
             </div>
 
         </section>
 
 
-        <!-- ERROR -->
+        <!-- =========================
+             ERROR
+        ========================= -->
 
         <section
             class="error-state"
@@ -843,10 +1203,12 @@
                 Message not found.
             </h1>
 
+
             <p>
                 This message may no longer exist
                 or you may not have access to it.
             </p>
+
 
             <a
                 href="dashboard.html"
@@ -858,8 +1220,11 @@
 
         </section>
 
+
     </main>
 
+
+    <!-- SUPABASE -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -873,42 +1238,79 @@
 
 
         const lockedView =
-            document.getElementById("lockedView");
+            document.getElementById(
+                "lockedView"
+            );
+
 
         const revealedView =
-            document.getElementById("revealedView");
+            document.getElementById(
+                "revealedView"
+            );
+
 
         const errorView =
-            document.getElementById("errorView");
+            document.getElementById(
+                "errorView"
+            );
+
 
         const messageTitle =
-            document.getElementById("messageTitle");
+            document.getElementById(
+                "messageTitle"
+            );
+
 
         const messageContent =
-            document.getElementById("messageContent");
+            document.getElementById(
+                "messageContent"
+            );
+
 
         const messageDate =
-            document.getElementById("messageDate");
+            document.getElementById(
+                "messageDate"
+            );
+
 
         const daysElement =
-            document.getElementById("days");
+            document.getElementById(
+                "days"
+            );
+
 
         const hoursElement =
-            document.getElementById("hours");
+            document.getElementById(
+                "hours"
+            );
+
 
         const minutesElement =
-            document.getElementById("minutes");
+            document.getElementById(
+                "minutes"
+            );
+
 
         const secondsElement =
-            document.getElementById("seconds");
+            document.getElementById(
+                "seconds"
+            );
+
 
         const revealDateElement =
-            document.getElementById("revealDate");
+            document.getElementById(
+                "revealDate"
+            );
 
 
         let targetDate = null;
+
         let countdownTimer = null;
 
+
+        /* =========================
+           GET MESSAGE ID
+        ========================= */
 
         function getMessageId() {
 
@@ -918,8 +1320,13 @@
                 );
 
             return params.get("id");
+
         }
 
+
+        /* =========================
+           DATE FORMAT
+        ========================= */
 
         function formatDate(date) {
 
@@ -929,34 +1336,56 @@
                     day: "2-digit",
                     month: "long",
                     year: "numeric",
+
                     hour: "2-digit",
-                    minute: "2-digit"
+                    minute: "2-digit",
+
+                    hour12: true
                 }
             ).toUpperCase();
 
         }
 
 
+        /* =========================
+           ERROR
+        ========================= */
+
         function showError() {
 
-            lockedView.style.display = "none";
-            revealedView.style.display = "none";
-            errorView.style.display = "block";
+            revealedView.style.display =
+                "none";
+
+            lockedView.style.display =
+                "none";
+
+            errorView.style.display =
+                "block";
 
         }
 
 
+        /* =========================
+           COUNTDOWN
+        ========================= */
+
         function updateCountdown() {
 
-            if (!targetDate) return;
+            if (!targetDate) {
+                return;
+            }
+
 
             const difference =
-                targetDate.getTime() - Date.now();
+                targetDate.getTime()
+                - Date.now();
 
 
             if (difference <= 0) {
 
-                clearInterval(countdownTimer);
+                clearInterval(
+                    countdownTimer
+                );
 
                 loadMessage();
 
@@ -979,13 +1408,15 @@
 
             const hours =
                 Math.floor(
-                    (totalSeconds % 86400) / 3600
+                    (totalSeconds % 86400)
+                    / 3600
                 );
 
 
             const minutes =
                 Math.floor(
-                    (totalSeconds % 3600) / 60
+                    (totalSeconds % 3600)
+                    / 60
                 );
 
 
@@ -994,48 +1425,86 @@
 
 
             daysElement.textContent =
-                String(days).padStart(2, "0");
+                String(days)
+                .padStart(2, "0");
+
 
             hoursElement.textContent =
-                String(hours).padStart(2, "0");
+                String(hours)
+                .padStart(2, "0");
+
 
             minutesElement.textContent =
-                String(minutes).padStart(2, "0");
+                String(minutes)
+                .padStart(2, "0");
+
 
             secondsElement.textContent =
-                String(seconds).padStart(2, "0");
+                String(seconds)
+                .padStart(2, "0");
 
         }
 
+
+        /* =========================
+           SHOW REVEALED MESSAGE
+        ========================= */
 
         function showRevealedMessage(data) {
 
-            lockedView.style.display = "none";
-            errorView.style.display = "none";
-            revealedView.style.display = "block";
+            clearInterval(
+                countdownTimer
+            );
+
+
+            lockedView.style.display =
+                "none";
+
+
+            errorView.style.display =
+                "none";
+
+
+            revealedView.style.display =
+                "block";
 
 
             messageTitle.textContent =
-                data.title;
+                data.title || "Your message";
 
 
             messageContent.textContent =
-                data.message;
+                data.message || "";
 
 
-            messageDate.textContent =
-                `WRITTEN ${formatDate(
-                    new Date(data.created_at)
-                )}`;
+            if (data.created_at) {
+
+                messageDate.textContent =
+                    `WRITTEN ${formatDate(
+                        new Date(
+                            data.created_at
+                        )
+                    )}`;
+
+            }
 
         }
 
+
+        /* =========================
+           LOAD MESSAGE
+        ========================= */
 
         async function loadMessage() {
 
             if (!client) {
 
+                console.error(
+                    "AFTERME Supabase client not found."
+                );
+
                 showError();
+
                 return;
 
             }
@@ -1069,6 +1538,7 @@
             if (!messageId) {
 
                 showError();
+
                 return;
 
             }
@@ -1109,16 +1579,26 @@
 
 
             targetDate =
-                new Date(data.reveal_at);
+                new Date(
+                    data.reveal_at
+                );
 
+
+            /* MESSAGE STILL LOCKED */
 
             if (
-                Date.now() <
+                Date.now()
+                <
                 targetDate.getTime()
             ) {
 
                 revealedView.style.display =
                     "none";
+
+
+                errorView.style.display =
+                    "none";
+
 
                 lockedView.style.display =
                     "block";
@@ -1133,21 +1613,31 @@
                 updateCountdown();
 
 
+                clearInterval(
+                    countdownTimer
+                );
+
+
                 countdownTimer =
                     setInterval(
                         updateCountdown,
                         1000
                     );
 
+
                 return;
 
             }
 
 
+            /* MESSAGE REVEALED */
+
             showRevealedMessage(data);
 
         }
 
+
+        /* START */
 
         loadMessage();
 
