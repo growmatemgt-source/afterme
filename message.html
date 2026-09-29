@@ -1,482 +1,577 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Message — AFTERME</title>
-
-    <meta
-        name="description"
-        content="A message from your past self."
-    >
+    <title>Your Moment — AFTERME</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap"
-        rel="stylesheet"
-    >
-
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 
     <style>
 
         :root {
-
             --bg: #050506;
+            --surface: #0b0c0e;
+            --surface-soft: #0e1012;
 
-            --surface: #0b0c0f;
-
-            --text: #ebe9e2;
-
-            --muted: #85858a;
-
-            --dim: #55565b;
+            --text: #f0eee7;
+            --muted: #8d8d91;
+            --dim: #5b5c60;
 
             --accent: #55d9ff;
+            --accent-soft: rgba(85,217,255,.07);
 
-            --accent-soft:
-                rgba(85, 217, 255, .08);
+            --line: rgba(240,238,231,.09);
+            --line-soft: rgba(240,238,231,.055);
 
-            --line:
-                rgba(235, 233, 226, .09);
-
-            --line-strong:
-                rgba(235, 233, 226, .16);
-
-            --serif:
-                "Playfair Display", serif;
-
-            --sans:
-                "Inter", sans-serif;
-
-            --mono:
-                "DM Mono", monospace;
-
+            --sans: "Inter", sans-serif;
+            --serif: "Playfair Display", serif;
+            --mono: "DM Mono", monospace;
         }
-
 
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
         }
 
-
-        html,
-        body {
-
-            min-height: 100%;
-
+        html {
+            scroll-behavior: smooth;
         }
 
-
         body {
-
             min-height: 100vh;
-
             background:
-
                 radial-gradient(
-                    circle at 50% 20%,
-                    rgba(85, 217, 255, .055),
-                    transparent 32%
+                    circle at 50% -10%,
+                    rgba(85,217,255,.075),
+                    transparent 34%
                 ),
-
                 radial-gradient(
-                    circle at 10% 90%,
-                    rgba(85, 217, 255, .025),
+                    circle at 90% 85%,
+                    rgba(85,217,255,.025),
                     transparent 30%
                 ),
-
                 var(--bg);
 
             color: var(--text);
-
             font-family: var(--sans);
-
             overflow-x: hidden;
-
         }
-
 
         a {
-
             color: inherit;
-
             text-decoration: none;
-
         }
 
+        /* subtle background */
 
-        /* GRID */
-
-        .grid {
-
+        .background-grid {
             position: fixed;
-
             inset: 0;
-
             pointer-events: none;
-
-            opacity: .10;
+            opacity: .055;
 
             background-image:
-
                 linear-gradient(
-                    rgba(255,255,255,.025) 1px,
+                    rgba(255,255,255,.035) 1px,
                     transparent 1px
                 ),
-
                 linear-gradient(
                     90deg,
-                    rgba(255,255,255,.025) 1px,
+                    rgba(255,255,255,.035) 1px,
                     transparent 1px
                 );
 
-            background-size: 80px 80px;
+            background-size: 90px 90px;
 
             mask-image:
                 radial-gradient(
-                    circle at center,
-                    black,
-                    transparent 75%
+                    ellipse at center,
+                    black 0%,
+                    transparent 76%
                 );
-
         }
-
 
         /* NAV */
 
         .topbar {
-
             height: 82px;
-
             padding: 0 5vw;
 
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
 
-            border-bottom:
-                1px solid var(--line);
+            border-bottom: 1px solid var(--line);
 
             position: relative;
-
-            z-index: 5;
-
+            z-index: 10;
         }
-
 
         .brand {
-
             display: flex;
-
             align-items: center;
-
             gap: 13px;
-
         }
 
-
         .brand-mark {
-
             width: 30px;
-
             height: 30px;
+
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+
+            display: grid;
+            place-items: center;
 
             position: relative;
 
-            display: grid;
-
-            place-items: center;
-
-            border:
-                1px solid var(--accent);
-
-            border-radius: 50%;
-
             font-family: var(--mono);
-
             font-size: 10px;
-
         }
 
-
         .brand-orbit {
-
             position: absolute;
 
             width: 43px;
-
             height: 15px;
 
-            border:
-                1px solid
-                rgba(85, 217, 255, .45);
-
+            border: 1px solid rgba(85,217,255,.42);
             border-radius: 50%;
 
-            transform:
-                rotate(-28deg);
-
+            transform: rotate(-28deg);
         }
 
-
         .brand-dot {
-
             position: absolute;
 
             width: 4px;
-
             height: 4px;
 
             right: -6px;
-
             top: -5px;
 
+            border-radius: 50%;
             background: var(--accent);
 
-            border-radius: 50%;
-
-            box-shadow:
-                0 0 12px var(--accent);
-
+            box-shadow: 0 0 12px var(--accent);
         }
-
 
         .brand-name {
-
             font-family: var(--mono);
-
             font-size: 12px;
-
             letter-spacing: .2em;
-
         }
 
-
-        .back {
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 9px;
 
             color: var(--muted);
 
             font-family: var(--mono);
-
             font-size: 8px;
-
             letter-spacing: .1em;
 
+            transition: color .25s ease;
         }
 
-
-        .back:hover {
-
+        .back-link:hover {
             color: var(--text);
-
         }
-
 
         /* MAIN */
 
         main {
-
-            width:
-                min(900px, 90%);
-
+            width: min(940px, calc(100% - 40px));
             margin: 0 auto;
 
-            padding:
-                85px 0 110px;
+            padding: 90px 0 120px;
 
             position: relative;
-
             z-index: 2;
-
         }
 
+        /* REVEALED HEADER */
 
-        /* LOCKED */
-
-        .locked {
-
+        .reveal-header {
             text-align: center;
-
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-
-        .lock-symbol {
-
-            width: 92px;
-
-            height: 92px;
-
-            margin: 0 auto;
-
-            display: grid;
-
-            place-items: center;
-
-            border:
-                1px solid
-                rgba(85, 217, 255, .25);
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
 
             color: var(--accent);
 
             font-family: var(--mono);
-
-            font-size: 24px;
-
-            position: relative;
-
+            font-size: 8px;
+            letter-spacing: .18em;
         }
 
+        .eyebrow::before,
+        .eyebrow::after {
+            content: "";
+            width: 24px;
+            height: 1px;
 
-        .lock-symbol::before {
+            background: rgba(85,217,255,.35);
+        }
 
+        .reveal-header h1 {
+            margin-top: 25px;
+
+            font-size: clamp(48px, 7.4vw, 88px);
+
+            line-height: .96;
+            letter-spacing: -.065em;
+
+            font-weight: 500;
+        }
+
+        .reveal-header h1 em {
+            color: var(--accent);
+
+            font-family: var(--serif);
+            font-weight: 500;
+        }
+
+        .subline {
+            max-width: 460px;
+            margin: 25px auto 0;
+
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* MESSAGE */
+
+        .message-wrapper {
+            margin-top: 60px;
+        }
+
+        .message-card {
+            position: relative;
+
+            border: 1px solid var(--line);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.025),
+                    rgba(255,255,255,.008)
+                );
+
+            padding: 58px 65px 42px;
+
+            overflow: hidden;
+        }
+
+        .message-card::before {
             content: "";
 
             position: absolute;
 
-            inset: -12px;
+            width: 260px;
+            height: 260px;
 
-            border:
-                1px solid
-                rgba(85, 217, 255, .07);
+            top: -170px;
+            right: -90px;
 
             border-radius: 50%;
 
+            background:
+                rgba(85,217,255,.055);
+
+            filter: blur(20px);
+
+            pointer-events: none;
         }
 
+        .message-card::after {
+            content: "";
 
-        .eyebrow {
+            position: absolute;
 
-            margin-top: 42px;
+            left: 0;
+            top: 0;
+
+            width: 2px;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent,
+                    var(--accent),
+                    transparent
+                );
+
+            opacity: .55;
+        }
+
+        .message-label {
+            color: var(--dim);
+
+            font-family: var(--mono);
+            font-size: 7px;
+            letter-spacing: .17em;
+
+            text-transform: uppercase;
+        }
+
+        .message-title {
+            margin-top: 17px;
+
+            font-family: var(--serif);
+
+            font-size: clamp(28px, 4vw, 42px);
+
+            line-height: 1.15;
+
+            font-weight: 500;
+            letter-spacing: -.02em;
+        }
+
+        .message-content {
+            margin-top: 32px;
+
+            max-width: 720px;
+
+            color: #a7a7aa;
+
+            font-size: 15px;
+            line-height: 2.05;
+
+            white-space: pre-wrap;
+        }
+
+        .message-footer {
+            margin-top: 45px;
+
+            padding-top: 22px;
+
+            border-top: 1px solid var(--line-soft);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .written {
+            color: var(--dim);
+
+            font-family: var(--mono);
+
+            font-size: 7px;
+
+            letter-spacing: .1em;
+
+            line-height: 1.8;
+        }
+
+        .opened-mark {
+            display: flex;
+            align-items: center;
+            gap: 8px;
 
             color: var(--accent);
 
             font-family: var(--mono);
 
+            font-size: 7px;
+
+            letter-spacing: .1em;
+        }
+
+        .opened-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: var(--accent);
+
+            box-shadow:
+                0 0 10px rgba(85,217,255,.65);
+        }
+
+        /* BOTTOM */
+
+        .bottom-area {
+            margin-top: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .memory-note {
+            color: var(--dim);
+
+            font-family: var(--mono);
+            font-size: 7px;
+
+            letter-spacing: .08em;
+        }
+
+        .dashboard-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 13px 17px;
+
+            border: 1px solid var(--line);
+
+            color: var(--muted);
+
+            font-family: var(--mono);
             font-size: 8px;
 
-            letter-spacing: .18em;
+            letter-spacing: .09em;
 
+            transition:
+                border-color .25s ease,
+                color .25s ease,
+                background .25s ease;
         }
 
+        .dashboard-button:hover {
+            border-color: rgba(85,217,255,.35);
 
-        .locked h1 {
+            color: var(--text);
 
-            margin-top: 20px;
+            background: var(--accent-soft);
+        }
 
-            font-size:
-                clamp(42px, 6vw, 72px);
+        /* ERROR */
 
-            line-height: 1;
+        .error-state {
+            display: none;
 
-            letter-spacing: -.055em;
+            text-align: center;
 
+            padding: 100px 0;
+        }
+
+        .error-state h1 {
+            font-size: 48px;
             font-weight: 500;
-
+            letter-spacing: -.04em;
         }
 
-
-        .locked h1 em {
-
-            font-family: var(--serif);
-
-            font-weight: 500;
-
-            color: var(--accent);
-
-        }
-
-
-        .locked-copy {
-
-            max-width: 500px;
-
-            margin: 24px auto 0;
+        .error-state p {
+            margin-top: 16px;
 
             color: var(--muted);
 
             font-size: 13px;
-
-            line-height: 1.9;
-
         }
 
+        /* LOCKED */
 
-        /* COUNTDOWN */
+        .locked {
+            text-align: center;
+        }
+
+        .lock-icon {
+            width: 82px;
+            height: 82px;
+
+            margin: 0 auto;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid rgba(85,217,255,.25);
+
+            color: var(--accent);
+
+            font-family: var(--mono);
+            font-size: 22px;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 70px rgba(85,217,255,.045);
+        }
+
+        .locked h1 {
+            margin-top: 28px;
+
+            font-size: clamp(46px, 7vw, 78px);
+
+            line-height: .98;
+
+            letter-spacing: -.06em;
+
+            font-weight: 500;
+        }
+
+        .locked h1 em {
+            font-family: var(--serif);
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .locked-copy {
+            max-width: 480px;
+            margin: 23px auto 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.8;
+        }
 
         .countdown {
+            max-width: 650px;
 
             margin: 55px auto 0;
 
             display: grid;
+            grid-template-columns: repeat(4, 1fr);
 
-            grid-template-columns:
-                repeat(4, 1fr);
+            border: 1px solid var(--line);
 
-            max-width: 620px;
-
-            border:
-                1px solid var(--line);
-
-            background:
-                rgba(11, 12, 15, .72);
-
+            background: rgba(11,12,14,.75);
         }
-
 
         .time-box {
-
             padding: 28px 12px;
 
-            border-right:
-                1px solid var(--line);
-
+            border-right: 1px solid var(--line);
         }
-
 
         .time-box:last-child {
-
             border-right: none;
-
         }
 
-
         .number {
-
             display: block;
 
             font-family: var(--mono);
 
-            font-size: clamp(24px, 4vw, 38px);
-
-            color: var(--text);
-
+            font-size: clamp(25px, 4vw, 38px);
         }
 
-
         .unit {
-
             display: block;
 
             margin-top: 8px;
@@ -488,13 +583,10 @@
             font-size: 7px;
 
             letter-spacing: .12em;
-
         }
 
-
         .reveal-date {
-
-            margin-top: 25px;
+            margin-top: 23px;
 
             color: var(--dim);
 
@@ -503,275 +595,84 @@
             font-size: 8px;
 
             letter-spacing: .08em;
-
         }
 
+        /* RESPONSIVE */
 
-        /* REVEALED */
-
-        .revealed {
-
-            display: none;
-
-        }
-
-
-        .revealed-head {
-
-            text-align: center;
-
-        }
-
-
-        .revealed .eyebrow {
-
-            display: block;
-
-            margin-top: 0;
-
-        }
-
-
-        .revealed h1 {
-
-            margin-top: 20px;
-
-            font-size:
-                clamp(42px, 6vw, 70px);
-
-            line-height: 1;
-
-            letter-spacing: -.055em;
-
-            font-weight: 500;
-
-        }
-
-
-        .revealed h1 em {
-
-            font-family: var(--serif);
-
-            color: var(--accent);
-
-            font-weight: 500;
-
-        }
-
-
-        .message-paper {
-
-            max-width: 720px;
-
-            margin: 55px auto 0;
-
-            padding: 45px;
-
-            border:
-                1px solid var(--line);
-
-            background:
-                rgba(11, 12, 15, .8);
-
-        }
-
-
-        .message-title {
-
-            font-family: var(--serif);
-
-            font-size: 27px;
-
-            line-height: 1.3;
-
-        }
-
-
-        .message-content {
-
-            margin-top: 30px;
-
-            color: var(--muted);
-
-            font-size: 14px;
-
-            line-height: 2;
-
-            white-space: pre-wrap;
-
-        }
-
-
-        .message-date {
-
-            margin-top: 35px;
-
-            padding-top: 18px;
-
-            border-top:
-                1px solid var(--line);
-
-            color: var(--dim);
-
-            font-family: var(--mono);
-
-            font-size: 7px;
-
-            letter-spacing: .1em;
-
-        }
-
-
-        .dashboard-link {
-
-            display: block;
-
-            width: fit-content;
-
-            margin: 30px auto 0;
-
-            padding: 13px 18px;
-
-            border:
-                1px solid
-                rgba(85, 217, 255, .3);
-
-            color: var(--muted);
-
-            font-family: var(--mono);
-
-            font-size: 8px;
-
-            letter-spacing: .1em;
-
-        }
-
-
-        .dashboard-link:hover {
-
-            background:
-                var(--accent-soft);
-
-            color: var(--text);
-
-        }
-
-
-        /* ERROR */
-
-        .error-state {
-
-            display: none;
-
-            text-align: center;
-
-            padding-top: 80px;
-
-        }
-
-
-        .error-state h1 {
-
-            font-size: 48px;
-
-            font-weight: 500;
-
-        }
-
-
-        .error-state p {
-
-            margin-top: 18px;
-
-            color: var(--muted);
-
-            font-size: 13px;
-
-        }
-
-
-        /* MOBILE */
-
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
 
             .topbar {
-
-                height: 75px;
-
+                height: 74px;
                 padding: 0 20px;
-
             }
 
+            .brand-name {
+                font-size: 10px;
+            }
 
             main {
-
-                width:
-                    calc(100% - 40px);
-
-                padding-top: 60px;
-
+                width: calc(100% - 30px);
+                padding-top: 65px;
             }
 
+            .reveal-header h1 {
+                font-size: 52px;
+            }
+
+            .message-card {
+                padding: 38px 25px 28px;
+            }
+
+            .message-content {
+                font-size: 14px;
+                line-height: 1.9;
+            }
+
+            .message-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .bottom-area {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard-button {
+                width: 100%;
+                justify-content: center;
+            }
 
             .countdown {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
-
+                grid-template-columns: repeat(2, 1fr);
             }
-
 
             .time-box:nth-child(2) {
-
                 border-right: none;
-
             }
-
 
             .time-box:nth-child(1),
             .time-box:nth-child(2) {
-
-                border-bottom:
-                    1px solid var(--line);
-
+                border-bottom: 1px solid var(--line);
             }
-
-
-            .message-paper {
-
-                padding: 25px;
-
-            }
-
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-    <div class="grid"></div>
-
+    <div class="background-grid"></div>
 
     <header class="topbar">
 
-        <a
-            href="dashboard.html"
-            class="brand"
-        >
+        <a href="dashboard.html" class="brand">
 
             <span class="brand-mark">
-
                 A
-
                 <span class="brand-orbit"></span>
-
                 <span class="brand-dot"></span>
-
             </span>
-
 
             <span class="brand-name">
                 AFTERME
@@ -779,12 +680,8 @@
 
         </a>
 
-
-        <a
-            href="dashboard.html"
-            class="back"
-        >
-            ← DASHBOARD
+        <a href="dashboard.html" class="back-link">
+            ← YOUR MESSAGES
         </a>
 
     </header>
@@ -792,171 +689,145 @@
 
     <main>
 
-        <!-- LOCKED -->
-
-        <section
-            class="locked"
-            id="lockedView"
-        >
-
-            <div class="lock-symbol">
-                ∞
-            </div>
-
-
-            <div class="eyebrow">
-                MESSAGE SEALED
-            </div>
-
-
-            <h1>
-                Not yet.
-                <em>Wait.</em>
-            </h1>
-
-
-            <p
-                class="locked-copy"
-                id="lockedCopy"
-            >
-                Something from your past is waiting
-                for the right moment.
-            </p>
-
-
-            <div
-                class="countdown"
-                id="countdown"
-            >
-
-                <div class="time-box">
-
-                    <span
-                        class="number"
-                        id="days"
-                    >
-                        00
-                    </span>
-
-                    <span class="unit">
-                        DAYS
-                    </span>
-
-                </div>
-
-
-                <div class="time-box">
-
-                    <span
-                        class="number"
-                        id="hours"
-                    >
-                        00
-                    </span>
-
-                    <span class="unit">
-                        HOURS
-                    </span>
-
-                </div>
-
-
-                <div class="time-box">
-
-                    <span
-                        class="number"
-                        id="minutes"
-                    >
-                        00
-                    </span>
-
-                    <span class="unit">
-                        MINUTES
-                    </span>
-
-                </div>
-
-
-                <div class="time-box">
-
-                    <span
-                        class="number"
-                        id="seconds"
-                    >
-                        00
-                    </span>
-
-                    <span class="unit">
-                        SECONDS
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="reveal-date"
-                id="revealDate"
-            >
-                REVEAL DATE — LOADING
-            </div>
-
-        </section>
-
-
         <!-- REVEALED -->
 
-        <section
-            class="revealed"
-            id="revealedView"
-        >
+        <section class="revealed" id="revealedView">
 
-            <div class="revealed-head">
+            <div class="reveal-header">
 
                 <span class="eyebrow">
                     THE MOMENT HAS ARRIVED
                 </span>
-
 
                 <h1>
                     You left this
                     <em>for yourself.</em>
                 </h1>
 
+                <p class="subline">
+                    A message from another version of you,
+                    arriving exactly when you asked for it.
+                </p>
+
             </div>
 
 
-            <article class="message-paper">
+            <div class="message-wrapper">
 
-                <h2
-                    class="message-title"
-                    id="messageTitle"
-                >
-                    Message
-                </h2>
+                <article class="message-card">
 
+                    <div class="message-label">
+                        A MESSAGE FROM YOUR PAST SELF
+                    </div>
 
-                <div
-                    class="message-content"
-                    id="messageContent"
-                ></div>
+                    <h2
+                        class="message-title"
+                        id="messageTitle"
+                    >
+                        Your message
+                    </h2>
 
-
-                <div
-                    class="message-date"
-                    id="messageDate"
-                ></div>
-
-            </article>
+                    <div
+                        class="message-content"
+                        id="messageContent"
+                    ></div>
 
 
-            <a
-                href="dashboard.html"
-                class="dashboard-link"
-            >
-                ← BACK TO YOUR MESSAGES
-            </a>
+                    <div class="message-footer">
+
+                        <div
+                            class="written"
+                            id="messageDate"
+                        >
+                            WRITTEN —
+                        </div>
+
+                        <div class="opened-mark">
+
+                            <span class="opened-dot"></span>
+
+                            MESSAGE OPENED
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <div class="bottom-area">
+
+                    <div class="memory-note">
+                        SOME THINGS ARE WORTH WAITING FOR.
+                    </div>
+
+                    <a
+                        href="dashboard.html"
+                        class="dashboard-button"
+                    >
+                        ← BACK TO YOUR MESSAGES
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOCKED -->
+
+        <section
+            class="locked"
+            id="lockedView"
+            style="display:none;"
+        >
+
+            <div class="lock-icon">
+                ∞
+            </div>
+
+            <span class="eyebrow" style="margin-top:35px;">
+                MESSAGE SEALED
+            </span>
+
+            <h1>
+                Not yet.
+                <em>Wait.</em>
+            </h1>
+
+            <p class="locked-copy">
+                Something from your past is waiting
+                for the right moment.
+            </p>
+
+            <div class="countdown">
+
+                <div class="time-box">
+                    <span class="number" id="days">00</span>
+                    <span class="unit">DAYS</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="hours">00</span>
+                    <span class="unit">HOURS</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="minutes">00</span>
+                    <span class="unit">MINUTES</span>
+                </div>
+
+                <div class="time-box">
+                    <span class="number" id="seconds">00</span>
+                    <span class="unit">SECONDS</span>
+                </div>
+
+            </div>
+
+            <div class="reveal-date" id="revealDate">
+                REVEAL DATE — LOADING
+            </div>
 
         </section>
 
@@ -972,16 +843,15 @@
                 Message not found.
             </h1>
 
-
             <p>
                 This message may no longer exist
                 or you may not have access to it.
             </p>
 
-
             <a
                 href="dashboard.html"
-                class="dashboard-link"
+                class="dashboard-button"
+                style="margin-top:30px;"
             >
                 ← BACK TO DASHBOARD
             </a>
@@ -1003,79 +873,42 @@
 
 
         const lockedView =
-            document.getElementById(
-                "lockedView"
-            );
-
+            document.getElementById("lockedView");
 
         const revealedView =
-            document.getElementById(
-                "revealedView"
-            );
-
+            document.getElementById("revealedView");
 
         const errorView =
-            document.getElementById(
-                "errorView"
-            );
-
-
-        const daysElement =
-            document.getElementById(
-                "days"
-            );
-
-
-        const hoursElement =
-            document.getElementById(
-                "hours"
-            );
-
-
-        const minutesElement =
-            document.getElementById(
-                "minutes"
-            );
-
-
-        const secondsElement =
-            document.getElementById(
-                "seconds"
-            );
-
-
-        const revealDateElement =
-            document.getElementById(
-                "revealDate"
-            );
-
+            document.getElementById("errorView");
 
         const messageTitle =
-            document.getElementById(
-                "messageTitle"
-            );
-
+            document.getElementById("messageTitle");
 
         const messageContent =
-            document.getElementById(
-                "messageContent"
-            );
-
+            document.getElementById("messageContent");
 
         const messageDate =
-            document.getElementById(
-                "messageDate"
-            );
+            document.getElementById("messageDate");
+
+        const daysElement =
+            document.getElementById("days");
+
+        const hoursElement =
+            document.getElementById("hours");
+
+        const minutesElement =
+            document.getElementById("minutes");
+
+        const secondsElement =
+            document.getElementById("seconds");
+
+        const revealDateElement =
+            document.getElementById("revealDate");
 
 
         let targetDate = null;
-
         let countdownTimer = null;
 
-
-        /* =========================
-           GET MESSAGE ID
-        ========================= */
 
         function getMessageId() {
 
@@ -1085,49 +918,8 @@
                 );
 
             return params.get("id");
-
         }
 
-
-        /* =========================
-           ESCAPE HTML
-        ========================= */
-
-        function escapeHtml(value) {
-
-            return String(value)
-
-                .replaceAll(
-                    "&",
-                    "&amp;"
-                )
-
-                .replaceAll(
-                    "<",
-                    "&lt;"
-                )
-
-                .replaceAll(
-                    ">",
-                    "&gt;"
-                )
-
-                .replaceAll(
-                    '"',
-                    "&quot;"
-                )
-
-                .replaceAll(
-                    "'",
-                    "&#039;"
-                );
-
-        }
-
-
-        /* =========================
-           FORMAT DATE
-        ========================= */
 
         function formatDate(date) {
 
@@ -1145,54 +937,28 @@
         }
 
 
-        /* =========================
-           SHOW ERROR
-        ========================= */
-
         function showError() {
 
-            lockedView.style.display =
-                "none";
-
-            revealedView.style.display =
-                "none";
-
-            errorView.style.display =
-                "block";
+            lockedView.style.display = "none";
+            revealedView.style.display = "none";
+            errorView.style.display = "block";
 
         }
 
 
-        /* =========================
-           COUNTDOWN
-        ========================= */
-
         function updateCountdown() {
 
-            if (!targetDate) {
-                return;
-            }
-
-
-            const now =
-                Date.now();
-
-
-            const target =
-                targetDate.getTime();
-
+            if (!targetDate) return;
 
             const difference =
-                target - now;
+                targetDate.getTime() - Date.now();
 
 
             if (difference <= 0) {
 
-                clearInterval(
-                    countdownTimer
-                );
+                clearInterval(countdownTimer);
 
-                revealMessage();
+                loadMessage();
 
                 return;
 
@@ -1213,15 +979,13 @@
 
             const hours =
                 Math.floor(
-                    (totalSeconds % 86400) /
-                    3600
+                    (totalSeconds % 86400) / 3600
                 );
 
 
             const minutes =
                 Math.floor(
-                    (totalSeconds % 3600) /
-                    60
+                    (totalSeconds % 3600) / 60
                 );
 
 
@@ -1230,37 +994,48 @@
 
 
             daysElement.textContent =
-                String(days)
-                    .padStart(2, "0");
-
+                String(days).padStart(2, "0");
 
             hoursElement.textContent =
-                String(hours)
-                    .padStart(2, "0");
-
+                String(hours).padStart(2, "0");
 
             minutesElement.textContent =
-                String(minutes)
-                    .padStart(2, "0");
-
+                String(minutes).padStart(2, "0");
 
             secondsElement.textContent =
-                String(seconds)
-                    .padStart(2, "0");
+                String(seconds).padStart(2, "0");
 
         }
 
 
-        /* =========================
-           LOAD MESSAGE
-        ========================= */
+        function showRevealedMessage(data) {
+
+            lockedView.style.display = "none";
+            errorView.style.display = "none";
+            revealedView.style.display = "block";
+
+
+            messageTitle.textContent =
+                data.title;
+
+
+            messageContent.textContent =
+                data.message;
+
+
+            messageDate.textContent =
+                `WRITTEN ${formatDate(
+                    new Date(data.created_at)
+                )}`;
+
+        }
+
 
         async function loadMessage() {
 
             if (!client) {
 
                 showError();
-
                 return;
 
             }
@@ -1287,10 +1062,6 @@
             }
 
 
-            const user =
-                userData.user;
-
-
             const messageId =
                 getMessageId();
 
@@ -1298,7 +1069,6 @@
             if (!messageId) {
 
                 showError();
-
                 return;
 
             }
@@ -1309,23 +1079,18 @@
                 error
             } =
                 await client
-
                     .from("messages")
-
                     .select(
                         "id, user_id, title, message, reveal_at, status, created_at"
                     )
-
                     .eq(
                         "id",
                         messageId
                     )
-
                     .eq(
                         "user_id",
-                        user.id
+                        userData.user.id
                     )
-
                     .maybeSingle();
 
 
@@ -1334,10 +1099,7 @@
                 !data
             ) {
 
-                console.error(
-                    "Could not load message:",
-                    error
-                );
+                console.error(error);
 
                 showError();
 
@@ -1347,15 +1109,7 @@
 
 
             targetDate =
-                new Date(
-                    data.reveal_at
-                );
-
-
-            revealDateElement.textContent =
-                `REVEALS — ${formatDate(
-                    targetDate
-                )}`;
+                new Date(data.reveal_at);
 
 
             if (
@@ -1363,11 +1117,18 @@
                 targetDate.getTime()
             ) {
 
+                revealedView.style.display =
+                    "none";
+
                 lockedView.style.display =
                     "block";
 
-                revealedView.style.display =
-                    "none";
+
+                revealDateElement.textContent =
+                    `REVEALS — ${formatDate(
+                        targetDate
+                    )}`;
+
 
                 updateCountdown();
 
@@ -1378,70 +1139,19 @@
                         1000
                     );
 
-
                 return;
 
             }
 
 
-            showRevealedMessage(
-                data
-            );
+            showRevealedMessage(data);
 
         }
 
-
-        /* =========================
-           REVEAL MESSAGE
-        ========================= */
-
-        function revealMessage() {
-
-            loadMessage();
-
-        }
-
-
-        function showRevealedMessage(
-            data
-        ) {
-
-            lockedView.style.display =
-                "none";
-
-            errorView.style.display =
-                "none";
-
-            revealedView.style.display =
-                "block";
-
-
-            messageTitle.textContent =
-                data.title;
-
-
-            messageContent.textContent =
-                data.message;
-
-
-            messageDate.textContent =
-                `WRITTEN ${formatDate(
-                    new Date(
-                        data.created_at
-                    )
-                )}`;
-
-        }
-
-
-        /* =========================
-           START
-        ========================= */
 
         loadMessage();
 
     </script>
 
 </body>
-
 </html>
